@@ -1,0 +1,49 @@
+# ---------------------------------------------------------------------------
+# Netlify configuration — Nexora Technologies
+#
+# Two supported ways to deploy this project on Netlify. Pick ONE and comment
+# out the other. The server build (default, below) keeps the API routes and
+# on-demand image optimisation. The static build has no server at all.
+# ---------------------------------------------------------------------------
+
+# ── OPTION A (default): Next.js server build via the Netlify Next runtime ──
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Next 15 requires Node >= 18.18; pin explicitly so the build image cannot
+  # fall back to an older default.
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--no-audit --no-fund"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# ── OPTION B: plain static export (no server, no API routes) ──
+# Comment out everything above and use this instead:
+#
+# [build]
+#   command = "npm run build:static"
+#   publish = "out"
+#
+# [build.environment]
+#   NODE_VERSION = "20"
+#
+# With this option the enquiry and application forms have no backend, so they
+# validate and then show a "preview build" notice. Set NEXT_PUBLIC_FORM_ENDPOINT
+# and NEXT_PUBLIC_APPLY_ENDPOINT to a hosted form service (or a Netlify Function)
+# to make them live.
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --shell: #050b1c;
+    --radius-card: 1.25rem;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    @apply bg-navy-950 text-ink-200 font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-display text-white tracking-tight;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  :focus-visible {
+    outline: 2px solid #4da6ff;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection { background: rgba(31, 139, 255, 0.35); color: #fff; }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #050b1c; }
+  ::-webkit-scrollbar-thumb { background: #17264a; border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: #24365f; }
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/10 bg-white/[0.045] backdrop-blur-xl;
+  }
+
+  .glass-strong {
+    @apply border border-white/10 bg-white/[0.07] backdrop-blur-2xl;
+  }
+
+  .card-hover {
+    @apply transition duration-500 ease-premium hover:-translate-y-1.5 hover:border-electric-400/40 hover:bg-white/[0.075];
+  }
+
+  .section {
+    @apply py-20 md:py-28;
+  }
+
+  .eyebrow {
+    @apply inline-flex w-fit items-center gap-2 rounded-full border border-electric-400/25 bg-electric-500/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-electric-400;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-white via-electric-400 to-violet-400 bg-clip-text text-transparent;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-300 ease-premium disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-electric-500 to-violet-500 text-white shadow-glow hover:brightness-110 hover:shadow-[0_20px_50px_-18px_rgba(31,139,255,0.8)];
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/20 bg-white/[0.04] text-white hover:border-electric-400/50 hover:bg-white/[0.09];
+  }
+
+  .btn-light {
+    @apply btn bg-white text-navy-900 hover:bg-ink-100;
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-electric-400 transition hover:gap-2.5 hover:text-electric-400/80;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-white/10 bg-navy-900/60 px-4 py-3 text-sm text-white placeholder:text-ink-500 transition focus:border-electric-400/60 focus:bg-navy-900 focus:outline-none focus:ring-2 focus:ring-electric-500/30;
+  }
+
+  .field-error { @apply border-red-400/60 focus:ring-red-400/25; }
+
+  .label { @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-ink-400; }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  .reveal-d1 { transition-delay: 90ms; }
+  .reveal-d2 { transition-delay: 180ms; }
+  .reveal-d3 { transition-delay: 270ms; }
+  .reveal-d4 { transition-delay: 360ms; }
+  .reveal-d5 { transition-delay: 450ms; }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ============================================================
+   LAYOUT SYSTEM — section shapes
+   Each homepage/section type below has a deliberately different
+   structure so no two blocks read as the same shape.
+   ============================================================ */
+
+@layer components {
+  /* Hairline rule used instead of cards in editorial lists */
+  .rule-row {
+    @apply border-t border-white/10 transition-colors duration-500;
+  }
+  .rule-row:last-child {
+    @apply border-b;
+  }
+
+  /* Oversized index numeral for editorial lists */
+  .idx {
+    @apply font-display text-[13px] font-semibold tabular-nums tracking-[0.2em] text-electric-400;
+  }
+
+  /* Bento tile */
+  .bento {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition duration-500 ease-premium hover:border-electric-400/40;
+  }
+
+  /* Full-bleed feature row media */
+  .bleed-media {
+    @apply relative overflow-hidden rounded-2xl border border-white/10;
+  }
+}
+
+@layer utilities {
+  .marquee-track {
+    animation: marquee-x 42s linear infinite;
+  }
+  .marquee-track-rev {
+    animation: marquee-x 52s linear infinite reverse;
+  }
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track,
+    .marquee-track-rev {
+      animation: none;
+    }
+  }
+
+  .diag-top {
+    clip-path: polygon(0 3.5rem, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .text-outline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+    color: transparent;
+  }
+
+  .snap-x-rail {
+    scroll-snap-type: x mandatory;
+  }
+  .snap-x-rail > * {
+    scroll-snap-align: start;
+  }
+}
+
+@keyframes marquee-x {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
