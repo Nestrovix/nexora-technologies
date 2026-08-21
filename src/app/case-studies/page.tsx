@@ -26,7 +26,7 @@ export default function CaseStudiesPage() {
         }
         lead="Filter by industry, service or technology. Every project below is a sample built for this website — not a real client engagement."
         image="/assets/images/pages/case-studies-hero.webp"
-        imageAlt="Team reviewing a project delivery plan"
+        imageAlt="Two engineers reviewing source code on a shared monitor"
         breadcrumbs={[{ label: 'Case Studies' }]}
         meta={[
           { k: 'Projects', v: `${caseStudies.length} sample engagements` },

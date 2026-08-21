@@ -28,7 +28,7 @@ export default function IndustriesPage() {
         }
         lead="The same technology behaves differently under retail peak load, clinical privacy rules or manufacturing uptime targets. We build for the constraints you actually operate under."
         image="/assets/images/pages/industries-hero.webp"
-        imageAlt="Corporate skyline representing the industries Nexora serves"
+        imageAlt="Interior of a data centre, rows of server cabinets and overhead cabling"
         breadcrumbs={[{ label: 'Industries' }]}
         meta={[
           { k: 'Sectors', v: '8 with active delivery' },

@@ -140,7 +140,7 @@ export default function CareersPage() {
                   <span className="idx hidden lg:block">{String(i + 1).padStart(2, '0')}</span>
 
                   <span className="min-w-0">
-                    <span className="block font-display text-lg font-semibold text-ink-900">{job.title}</span>
+                    <h3 className="block font-display text-lg font-semibold text-ink-900">{job.title}</h3>
                     <span className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-600 lg:hidden">
                       <span className="text-accent">{job.category}</span>
                       <span>·</span>

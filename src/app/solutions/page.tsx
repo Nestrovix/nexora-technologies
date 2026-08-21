@@ -4,7 +4,8 @@ import Link from 'next/link';
 import Icon from '@/components/Icon';
 import PageIntro from '@/components/PageIntro';
 import CTASection from '@/components/CTASection';
-import { SpecLabel } from '@/components/Section';
+import StatusPanel from '@/components/StatusPanel';
+import { AnchorHeading, CommitRef, SpecLabel } from '@/components/Section';
 import { solutions } from '@/data/solutions';
 import { industries } from '@/data/industries';
 
@@ -107,11 +108,51 @@ export default function SolutionsPage() {
         </div>
       </section>
 
+      {/* Operations — what a managed solution reports back */}
+      <section id="operations" className="section border-t border-line">
+        <div className="container">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
+            <div>
+              <SpecLabel index="02" className="reveal">Operations</SpecLabel>
+              <AnchorHeading
+                id="operations-reporting"
+                className="reveal reveal-d1 mt-5 max-w-2xl text-3xl font-semibold leading-[1.12] sm:text-4xl"
+              >
+                What a managed solution reports back
+              </AnchorHeading>
+              <p className="reveal reveal-d2 mt-4 max-w-xl text-base leading-relaxed text-ink-600">
+                Every solution we run comes with the same operational surface: availability against a stated objective,
+                a latency budget, release cadence and a remaining error budget.
+              </p>
+            </div>
+            <CommitRef path="spec/operations" hash="1f7c40e" />
+          </div>
+          <div className="grid min-w-0 gap-8 lg:grid-cols-[1.35fr_0.65fr] lg:items-start">
+            <StatusPanel className="reveal reveal-d2" />
+            <figure className="reveal reveal-d3 min-w-0">
+              <div className="ticked relative aspect-[16/10] w-full overflow-hidden border border-line bg-band">
+                <Image
+                  src="/assets/images/hero/hero-observability-wall.webp"
+                  alt="An operations dashboard showing service metrics and trend charts"
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 30vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="spec-key mt-3 text-ink-500">
+                Fig. 02 — Operations dashboard during a managed-service review
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       {/* Industry applicability — a compact chip band, not a card grid */}
       <section className="border-y border-line bg-band py-16">
         <div className="container grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-16">
           <div>
-            <SpecLabel index="02" className="reveal">Applied by Industry</SpecLabel>
+            <SpecLabel index="03" className="reveal">Applied by Industry</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold leading-[1.15] sm:text-3xl">
               The same solutions, shaped to your sector
             </h2>

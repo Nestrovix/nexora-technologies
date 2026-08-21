@@ -92,3 +92,61 @@ export function GridBackdrop() {
     </div>
   );
 }
+
+/* ─────────────────────────────────────────── Engineering furniture */
+
+/**
+ * A monospace eyebrow — used where the label should read as something typed
+ * (a path, a ref, a spec id) rather than typeset.
+ */
+export function MonoEyebrow({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <span className={`mono-eyebrow ${className}`}>{children}</span>;
+}
+
+/** `v2.4.1` — a bordered monospace chip used beside engineering headings. */
+export function VersionTag({ version, className = '' }: { version: string; className?: string }) {
+  return (
+    <span className={`tag-version ${className}`}>
+      <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+      {version}
+    </span>
+  );
+}
+
+/**
+ * A section heading with a `#` deep link, the way a docs site anchors its
+ * sections. The hash is hidden from assistive tech; the link itself is
+ * labelled, keyboard reachable and shows a visible focus ring.
+ */
+export function AnchorHeading({
+  id,
+  children,
+  className = '',
+  level = 2,
+}: {
+  id: string;
+  children: ReactNode;
+  className?: string;
+  level?: 2 | 3;
+}) {
+  const Tag = level === 3 ? 'h3' : 'h2';
+  return (
+    <Tag id={id} className={`scroll-mt-28 ${className}`}>
+      {children}
+      <a href={`#${id}`} className="anchor-hash focus-visible:opacity-100" aria-label="Link to this section">
+        <span aria-hidden="true">#</span>
+      </a>
+    </Tag>
+  );
+}
+
+/**
+ * A commit-hash style reference, e.g. `spec/architecture · a41f9c2`.
+ */
+export function CommitRef({ path, hash }: { path: string; hash: string }) {
+  return (
+    <span className="commit-ref">
+      {path} · {hash}
+    </span>
+  );
+}

@@ -40,7 +40,7 @@ export default function FaqPage() {
         }
         lead="Scoping, pricing, delivery and support — the questions that come up before most engagements."
         image="/assets/images/pages/faq-hero.webp"
-        imageAlt="Consultant reviewing project details on a laptop"
+        imageAlt="A service dashboard showing live metrics and trend charts"
         breadcrumbs={[{ label: 'FAQ' }]}
         meta={[
           { k: 'General', v: `${faqs.length} questions` },

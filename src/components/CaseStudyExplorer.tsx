@@ -160,7 +160,7 @@ export default function CaseStudyExplorer({ items, industriesList, servicesList,
                     />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="font-display text-lg font-bold leading-snug text-ink-900">{project.title}</h3>
+                    <h2 className="font-display text-lg font-bold leading-snug text-ink-900">{project.title}</h2>
                     <p className="mt-2 text-sm leading-relaxed text-ink-600">{project.summary}</p>
                     <div className="mt-3 flex flex-wrap gap-1.5">
                       {project.technologies.slice(0, 4).map((t) => (

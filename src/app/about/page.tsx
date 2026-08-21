@@ -5,7 +5,7 @@ import Icon from '@/components/Icon';
 import PageIntro from '@/components/PageIntro';
 import CTASection from '@/components/CTASection';
 import MilestoneRail from '@/components/MilestoneRail';
-import TechRails from '@/components/TechRails';
+import StackMatrix from '@/components/StackMatrix';
 import { Note, SpecLabel } from '@/components/Section';
 import {
   leadership,
@@ -38,8 +38,8 @@ export default function AboutPage() {
           </>
         }
         lead={`Since ${site.founded}, Nexora has built the software, cloud platforms and data capability that businesses across India and international markets depend on every day.`}
-        image="/assets/images/about/modern-technology-workspace.webp"
-        imageAlt="Modern technology workspace at Nexora Technologies"
+        image="/assets/images/about/engineering-workstation.webp"
+        imageAlt="An engineer reading application code across two monitors"
         breadcrumbs={[{ label: 'About' }]}
         meta={stats.map((s) => ({ k: s.label, v: s.value }))}
       />
@@ -235,8 +235,8 @@ export default function AboutPage() {
             </Link>
           </div>
         </div>
-        <div className="reveal reveal-d2 mt-12">
-          <TechRails />
+        <div className="container">
+          <StackMatrix className="reveal reveal-d2 mt-12" />
         </div>
       </section>
 

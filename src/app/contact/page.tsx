@@ -18,7 +18,7 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: site.name,
-  image: `${site.url}/assets/images/hero/hero-global-technology-network.webp`,
+  image: `${site.url}/assets/images/hero/hero-engineering-floor.webp`,
   url: `${site.url}/contact`,
   telephone: site.contact.phoneHref,
   email: site.contact.email,
@@ -58,7 +58,7 @@ export default function ContactPage() {
         }
         lead="Tell us what you are trying to build or fix. We will come back with questions, a suggested approach and an indicative range."
         image="/assets/images/pages/contact-hero.webp"
-        imageAlt="Nexora Technologies meeting room"
+        imageAlt="Application source code on a developer's screen"
         breadcrumbs={[{ label: 'Contact' }]}
         meta={[
           { k: 'Response', v: 'Within one working day' },

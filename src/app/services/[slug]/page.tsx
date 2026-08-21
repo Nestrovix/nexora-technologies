@@ -6,7 +6,10 @@ import Icon from '@/components/Icon';
 import Accordion from '@/components/Accordion';
 import CTASection from '@/components/CTASection';
 import ProcessRail from '@/components/ProcessRail';
-import { SpecLabel } from '@/components/Section';
+import CodeBlock from '@/components/CodeBlock';
+import Terminal from '@/components/Terminal';
+import { AnchorHeading, CommitRef, MonoEyebrow, SpecLabel } from '@/components/Section';
+import { serviceArtefacts } from '@/data/engineering';
 import { getService, services } from '@/data/services';
 import { site } from '@/data/site';
 
@@ -38,6 +41,8 @@ export default async function ServiceDetailPage({ params }: Params) {
   const { slug } = await params;
   const service = getService(slug);
   if (!service) notFound();
+
+  const artefact = serviceArtefacts[service.slug];
 
   const index = services.findIndex((s) => s.slug === service.slug);
   const others = services.filter((s) => s.slug !== service.slug);
@@ -240,11 +245,68 @@ export default async function ServiceDetailPage({ params }: Params) {
         </div>
       </section>
 
+      {/* ── ARTEFACT — one piece of real output from this practice */}
+      {artefact && (
+        <section id="artefact" className="section py-16 md:py-20">
+          <div className="container">
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-6 border-b border-line pb-6">
+              <div>
+                <SpecLabel index="06" className="reveal">Sample Output</SpecLabel>
+                <AnchorHeading
+                  id="sample-output"
+                  className="reveal reveal-d1 mt-5 max-w-2xl text-2xl font-semibold sm:text-3xl"
+                >
+                  What this practice actually produces
+                </AnchorHeading>
+              </div>
+              <div className="reveal reveal-d2 flex flex-col items-start gap-2 lg:items-end">
+                <MonoEyebrow>{`~/${service.slug}`}</MonoEyebrow>
+                <CommitRef path="spec/practice" hash="6d21ba0" />
+              </div>
+            </div>
+
+            <div className="grid min-w-0 gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+              {artefact.kind === 'code' ? (
+                <CodeBlock
+                  className="reveal"
+                  lang={artefact.lang}
+                  filename={artefact.filename}
+                  meta={artefact.meta}
+                  code={artefact.code}
+                  caption={artefact.caption}
+                />
+              ) : (
+                <Terminal
+                  className="reveal"
+                  title={artefact.title}
+                  lines={artefact.lines}
+                  caption={artefact.caption}
+                />
+              )}
+
+              <dl className="reveal reveal-d1 min-w-0 border-t border-line">
+                {[
+                  { k: 'Handover', v: 'Source, infrastructure, runbooks and decision records' },
+                  { k: 'Reviews', v: 'Every change goes through a peer-reviewed pull request' },
+                  { k: 'Gates', v: 'lint · types · unit · contract · a11y · dependency audit' },
+                  { k: 'Ownership', v: 'Code and infrastructure transfer to you on completion' },
+                ].map((row) => (
+                  <div key={row.k} className="grid gap-x-6 border-b border-line py-4 sm:grid-cols-[7rem_1fr]">
+                    <dt className="spec-key pt-1 text-ink-500">{row.k}</dt>
+                    <dd className="font-mono text-[12px] leading-relaxed text-ink-700">{row.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── PROCESS */}
       <section className="section py-16 md:py-20">
         <div className="container">
           <div className="mb-12 max-w-2xl">
-            <SpecLabel index="06" className="reveal">Process</SpecLabel>
+            <SpecLabel index="07" className="reveal">Process</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold sm:text-3xl">How the engagement runs</h2>
           </div>
           <div className="reveal reveal-d2">
@@ -257,7 +319,7 @@ export default async function ServiceDetailPage({ params }: Params) {
       <section className="section border-t border-line bg-band py-16 md:py-20">
         <div className="container grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SpecLabel index="07" className="reveal">FAQ</SpecLabel>
+            <SpecLabel index="08" className="reveal">FAQ</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold sm:text-3xl">
               {service.title} — common questions
             </h2>

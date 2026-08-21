@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import Icon from './Icon';
 
 export default function Accordion({
@@ -11,6 +11,8 @@ export default function Accordion({
   defaultOpen?: number | null;
 }) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
+  /** Unique per instance — a page may render more than one accordion. */
+  const uid = useId();
 
   return (
     <div className="divide-y divide-line border-y border-line">
@@ -23,8 +25,8 @@ export default function Accordion({
                 type="button"
                 onClick={() => setOpen(expanded ? null : i)}
                 aria-expanded={expanded}
-                aria-controls={`faq-panel-${i}`}
-                id={`faq-trigger-${i}`}
+                aria-controls={`${uid}-panel-${i}`}
+                id={`${uid}-trigger-${i}`}
                 className="flex w-full items-center justify-between gap-4 px-1 py-5 text-left transition hover:bg-band sm:px-2"
               >
                 <span className="font-display text-[15px] font-semibold text-ink-900 sm:text-base">{item.q}</span>
@@ -38,9 +40,9 @@ export default function Accordion({
               </button>
             </h3>
             <div
-              id={`faq-panel-${i}`}
+              id={`${uid}-panel-${i}`}
               role="region"
-              aria-labelledby={`faq-trigger-${i}`}
+              aria-labelledby={`${uid}-trigger-${i}`}
               hidden={!expanded}
               className="px-1 pb-6 sm:px-2"
             >

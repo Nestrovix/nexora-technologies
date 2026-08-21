@@ -23,9 +23,19 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  env: {
+    /** Exposed so the static image loader can re-apply the base path. */
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   images: {
-    unoptimized: isStatic,
-    formats: ['image/avif', 'image/webp'],
+    /**
+     * The static export serves the original files through a custom loader
+     * rather than `unoptimized`, because an unoptimized image ignores
+     * `basePath` and 404s when the site is bundled under a sub-path.
+     */
+    ...(isStatic
+      ? { loader: 'custom', loaderFile: './src/lib/image-loader.js' }
+      : { formats: ['image/avif', 'image/webp'] }),
     deviceSizes: [360, 480, 640, 768, 1024, 1280, 1536, 1920],
   },
   ...(isStatic

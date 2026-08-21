@@ -4,7 +4,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Icon from '@/components/Icon';
 import CTASection from '@/components/CTASection';
-import { GridBackdrop, Note, SampleBadge, SpecLabel } from '@/components/Section';
+import ArchitectureDiagram from '@/components/ArchitectureDiagram';
+import PipelineStrip from '@/components/PipelineStrip';
+import { AnchorHeading, CommitRef, GridBackdrop, MonoEyebrow, Note, SampleBadge, SpecLabel } from '@/components/Section';
 import { caseStudies, getCaseStudy } from '@/data/case-studies';
 import { site } from '@/data/site';
 
@@ -160,6 +162,39 @@ export default async function CaseStudyPage({ params }: Params) {
             <strong className="font-semibold">Sample project:</strong> this case study is illustrative content created
             for this website build. It does not represent a real client, engagement or verified outcome.
           </Note>
+        </div>
+      </section>
+
+      {/* ── SYSTEM SHAPE — reference architecture + delivery pipeline */}
+      <section id="system" className="section border-t border-line bg-band">
+        <div className="container">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <SpecLabel index="04" className="reveal">System Shape</SpecLabel>
+              <AnchorHeading
+                id="system-shape"
+                className="reveal reveal-d1 mt-5 max-w-2xl text-3xl font-semibold leading-[1.12] sm:text-3xl"
+              >
+                How a build like this is put together
+              </AnchorHeading>
+              <p className="reveal reveal-d2 mt-4 max-w-xl text-base leading-relaxed text-ink-600">
+                The reference architecture and delivery pipeline below are the shape we would apply to a project of
+                this kind. Both are illustrative, like the rest of this sample case study.
+              </p>
+            </div>
+            <div className="reveal reveal-d2 flex flex-col items-start gap-3 lg:items-end">
+              <MonoEyebrow>{`~/${study.slug}`}</MonoEyebrow>
+              <CommitRef path="spec/architecture" hash="c9b0e13" />
+            </div>
+          </div>
+
+          <div className="reveal reveal-d2">
+            <ArchitectureDiagram />
+          </div>
+
+          <div className="reveal reveal-d3 mt-12">
+            <PipelineStrip />
+          </div>
         </div>
       </section>
 

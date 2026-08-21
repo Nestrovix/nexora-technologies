@@ -132,14 +132,27 @@ rules instead of shadows, squared corners and a single accent.
 | Rule | `line #D9DEE7` (1px hairlines carry all structure) |
 | Accent | `accent #0F766E` (single teal — no gradients, no glow) |
 | Text | `ink-900 #0B1120`, `ink-700 #313C4F`, `ink-600 #4A5568`, `ink-500 #5B6779` |
-| Display font | Chivo (400/500/600/700) |
+| Display font | Manrope (400/500/600/700/800) |
 | Body / UI font | Public Sans (400/500/600/700) |
+| Code / terminal font | Fira Code (400/500/600) |
+| Code panels | `term.bg #0B1120` with token colours that all clear 4.5:1 on it |
 | Radius | 2px ceiling (`rounded-sm`) |
 | Ground | Graph paper — 24px minor cells inside a 120px major division |
 | Motion | `cubic-bezier(.22,.61,.36,1)`, IntersectionObserver scroll reveal |
 
 Section labels are set as `01 / SERVICES` — a tracked uppercase Public Sans label
-with a leading index, rendered by the `SpecLabel` component. Services, solutions
+with a leading index, rendered by the `SpecLabel` component. Engineering sections
+add their own furniture: monospace path eyebrows (`MonoEyebrow`), version tags
+(`VersionTag`), commit-hash references (`CommitRef`) and `#` deep links on
+headings (`AnchorHeading`).
+
+The engineering artefacts — terminal transcripts (`Terminal`), syntax-highlighted
+code plates (`CodeBlock`, hand-rolled highlighting in `src/lib/highlight.ts`, no
+dependency), the reference architecture drawing (`ArchitectureDiagram`, inline
+SVG with a text equivalent beneath it), the delivery pipeline strip
+(`PipelineStrip`), the SLO console (`StatusPanel`) and the stack matrix
+(`StackMatrix`) — all read from `src/data/engineering.ts`. Every figure in them is
+demonstration data and is labelled as such on the page. Services, solutions
 and industries are bordered spec blocks in a hairline grid, each carrying a short
 label → value table; case studies read as data records (sector, service, duration,
 stack, outcome) in aligned rows. Reusable block, button, field and label styles

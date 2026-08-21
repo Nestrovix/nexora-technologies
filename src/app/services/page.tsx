@@ -5,7 +5,10 @@ import Icon from '@/components/Icon';
 import PageIntro from '@/components/PageIntro';
 import CTASection from '@/components/CTASection';
 import ProcessRail from '@/components/ProcessRail';
-import { SpecLabel } from '@/components/Section';
+import CodeBlock from '@/components/CodeBlock';
+import Terminal from '@/components/Terminal';
+import { AnchorHeading, CommitRef, MonoEyebrow, SpecLabel, VersionTag } from '@/components/Section';
+import { auditTerminal, querySample, specVersion } from '@/data/engineering';
 import { services } from '@/data/services';
 
 export const metadata: Metadata = {
@@ -135,11 +138,57 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* ── Engineering evidence — a query we would ship and an audit run */}
+      <section id="verification" className="section border-t border-line">
+        <div className="container">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
+            <div>
+              <SpecLabel index="02" className="reveal">Verification</SpecLabel>
+              <AnchorHeading
+                id="how-work-is-verified"
+                className="reveal reveal-d1 mt-5 max-w-2xl text-3xl font-semibold leading-[1.1] sm:text-4xl"
+              >
+                How the work is checked before you see it
+              </AnchorHeading>
+              <p className="reveal reveal-d2 mt-4 max-w-xl text-base leading-relaxed text-ink-600">
+                Performance budgets, dependency audits and access reviews run on a schedule, not when someone
+                remembers. Both samples below are illustrative.
+              </p>
+            </div>
+            <div className="reveal reveal-d2 flex flex-col items-start gap-3 lg:items-end">
+              <VersionTag version={specVersion} />
+              <CommitRef path="spec/services" hash="6d21ba0" />
+            </div>
+          </div>
+
+          <div className="grid min-w-0 gap-6 lg:grid-cols-2">
+            <CodeBlock
+              className="reveal"
+              lang="sql"
+              filename="analytics/store_fulfilment.sql"
+              meta="SQL"
+              code={querySample}
+              caption="Sample reporting query. Every dashboard read carries a plan-time budget, so a slow report is caught in review rather than in production."
+            />
+            <Terminal
+              className="reveal reveal-d1"
+              title="bash — scheduled platform audit"
+              lines={auditTerminal}
+              caption="Sample audit transcript. Dependency, secret and access reviews run on a schedule and raise tickets automatically."
+            />
+          </div>
+
+          <div className="mt-8">
+            <MonoEyebrow>gates: lint · types · unit · contract · a11y · audit</MonoEyebrow>
+          </div>
+        </div>
+      </section>
+
       {/* ── Process rail */}
       <section className="section border-t border-line bg-band">
         <div className="container">
           <div className="mb-14 max-w-2xl">
-            <SpecLabel index="02" className="reveal">Delivery Process</SpecLabel>
+            <SpecLabel index="03" className="reveal">Delivery Process</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.1] sm:text-4xl">
               The same seven stages behind every service
             </h2>

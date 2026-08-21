@@ -31,6 +31,23 @@ const config: Config = {
           700: '#0B5A54',
           50: '#E7F1F0',
         },
+        /**
+         * Terminal / code panel ramp. Dark ground #0B1120 with foregrounds that
+         * all clear 4.5:1 against it (measured minimum: 7.7:1).
+         */
+        term: {
+          bg: '#0B1120',       // panel ground
+          chrome: '#111A2C',   // title bar / gutter
+          line: '#26324A',     // hairlines inside the panel
+          text: '#D7DEEC',     // default code foreground — 13.9:1
+          dim: '#9AA7BF',      // comments, line numbers — 7.8:1
+          key: '#7FD1C6',      // keywords / accent — 10.6:1
+          str: '#A8D89A',      // strings — 11.6:1
+          num: '#F0B67F',      // numbers / literals — 10.5:1
+          fn: '#9DBEF5',       // functions / properties — 10.0:1
+          warn: '#F2C14E',     // amber status — 11.2:1
+          ok: '#6FCF97',       // green status — 9.9:1
+        },
         /** Text ramp — every step below clears 4.5:1 on both paper and band */
         ink: {
           900: '#0B1120', // headings, primary text
@@ -43,6 +60,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
         display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       /** Squared throughout — 2px is the ceiling. */
       borderRadius: {

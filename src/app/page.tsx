@@ -6,11 +6,16 @@ import CTASection from '@/components/CTASection';
 import Accordion from '@/components/Accordion';
 import EnquiryForm from '@/components/EnquiryForm';
 import ServiceIndex from '@/components/ServiceIndex';
-import TechRails from '@/components/TechRails';
+import StackMatrix from '@/components/StackMatrix';
+import Terminal from '@/components/Terminal';
+import CodeBlock from '@/components/CodeBlock';
+import ArchitectureDiagram from '@/components/ArchitectureDiagram';
+import PipelineStrip from '@/components/PipelineStrip';
+import StatusPanel from '@/components/StatusPanel';
 import BentoIndustries from '@/components/BentoIndustries';
 import ProcessRail from '@/components/ProcessRail';
 import FeatureRows from '@/components/FeatureRows';
-import { Note, SampleBadge, SpecLabel } from '@/components/Section';
+import { AnchorHeading, CommitRef, MonoEyebrow, Note, SampleBadge, SpecLabel, VersionTag } from '@/components/Section';
 import { services } from '@/data/services';
 import { caseStudies } from '@/data/case-studies';
 import { insights } from '@/data/insights';
@@ -18,12 +23,21 @@ import {
   faqs,
   stats,
   statsDisclaimer,
-  techStackDisclaimer,
   testimonials,
   testimonialsDisclaimer,
   whyChooseUs,
 } from '@/data/company';
 import { site } from '@/data/site';
+import {
+  apiRequestSample,
+  apiResponseSample,
+  ciSample,
+  deployTerminal,
+  engineeringStandards,
+  handlerSample,
+  infraSample,
+  specVersion,
+} from '@/data/engineering';
 
 export const metadata: Metadata = {
   title: 'IT Services & Software Development Company in India',
@@ -95,35 +109,49 @@ export default function HomePage() {
             ))}
           </dl>
 
-          <figure className="reveal reveal-d2 mt-12 pb-16">
-            <div className="ticked relative aspect-[21/7] w-full overflow-hidden border border-line bg-band">
-              <Image
-                src="/assets/images/hero/hero-global-technology-network.webp"
-                alt="Global technology network linking data centres and offices"
-                fill
-                priority
-                fetchPriority="high"
-                sizes="100vw"
-                className="object-cover object-center"
-              />
-            </div>
-            <figcaption className="spec-key mt-3 text-ink-500">
-              Fig. 01 — Global technology network linking data centres and offices
-            </figcaption>
-          </figure>
+          {/* Terminal transcript beside the delivery floor — the first thing a
+              technical visitor sees is a real deployment, not a stock photo. */}
+          <div className="reveal reveal-d2 mt-12 grid min-w-0 gap-6 pb-16 lg:grid-cols-[1.2fr_0.8fr]">
+            <Terminal
+              title="bash — orders-svc @ production"
+              lines={deployTerminal}
+              caption="Sample deployment transcript showing how we ship: tests gate the build, the release is canaried, and a rollback stays available for 24 hours. Illustrative output, not a live console."
+            />
+
+            <figure className="flex min-w-0 flex-col">
+              <div className="ticked relative min-h-[220px] flex-1 overflow-hidden border border-line bg-band">
+                <Image
+                  src="/assets/images/hero/hero-engineering-floor.webp"
+                  alt="Software engineers working at multi-monitor workstations with source code on screen"
+                  fill
+                  priority
+                  fetchPriority="high"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <figcaption className="spec-key mt-3 text-ink-500">
+                Fig. 01 — Engineering workstations during a release window
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════ 2. STATS — figures table */}
       <section className="border-b border-line bg-band py-10">
         <div className="container">
+          <div className="flex flex-wrap items-center gap-3 pb-4">
+            <MonoEyebrow>company/figures</MonoEyebrow>
+            <SampleBadge label="Sample data" className="ml-auto" />
+          </div>
           <dl className="grid grid-cols-2 border-t border-line sm:grid-cols-4">
             {stats.map((stat, i) => (
               <div
                 key={stat.label}
                 className={`reveal reveal-d${i} border-b border-line py-5 sm:border-r sm:px-6 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0`}
               >
-                <dt className="tabnum font-display text-3xl font-bold text-ink-900 sm:text-4xl">{stat.value}</dt>
+                <dt className="tabnum font-mono text-3xl font-medium text-ink-900 sm:text-4xl">{stat.value}</dt>
                 <dd className="mt-1.5 text-sm text-ink-600">{stat.label}</dd>
               </div>
             ))}
@@ -132,12 +160,49 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══════════════════════════════ 2b. DELIVERY — pipeline + SLOs */}
+      <section id="delivery" className="section">
+        <div className="container">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
+            <div>
+              <SpecLabel index="01" className="reveal">Delivery Pipeline</SpecLabel>
+              <AnchorHeading
+                id="delivery-pipeline"
+                className="reveal reveal-d1 mt-5 max-w-2xl text-3xl font-semibold leading-[1.08] sm:text-5xl"
+              >
+                Every change goes through the same five gates
+              </AnchorHeading>
+              <p className="reveal reveal-d2 mt-4 max-w-xl text-base leading-relaxed text-ink-600">
+                Commit, build, test, stage, production. Nothing reaches a live system without passing all five, and
+                every release stays reversible.
+              </p>
+            </div>
+            <div className="reveal reveal-d2 flex flex-col items-start gap-3 lg:items-end">
+              <VersionTag version={specVersion} />
+              <CommitRef path="spec/delivery" hash="a41f9c2" />
+            </div>
+          </div>
+
+          <div className="reveal reveal-d2">
+            <PipelineStrip />
+          </div>
+
+          <div className="reveal reveal-d3 mt-14">
+            <div className="mb-6 flex flex-wrap items-center gap-3">
+              <MonoEyebrow>platform/slo</MonoEyebrow>
+              <span className="commit-ref">trailing 30 days</span>
+            </div>
+            <StatusPanel />
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════════════════════════ 3. SERVICES — editorial index */}
       <section id="services" className="section">
         <div className="container">
           <div className="mb-12 flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
             <div>
-              <SpecLabel index="01" className="reveal">What We Do</SpecLabel>
+              <SpecLabel index="02" className="reveal">What We Do</SpecLabel>
               <h2 className="reveal reveal-d1 mt-5 max-w-2xl text-3xl font-semibold leading-[1.08] sm:text-5xl">
                 Eight practices. One delivery standard.
               </h2>
@@ -152,11 +217,129 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══════════════════════════════ 3b. ARCHITECTURE — reference diagram */}
+      <section id="architecture" className="section border-y border-line bg-band">
+        <div className="container">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <SpecLabel index="03" className="reveal">Reference Architecture</SpecLabel>
+              <AnchorHeading
+                id="reference-architecture"
+                className="reveal reveal-d1 mt-5 max-w-2xl text-3xl font-semibold leading-[1.1] sm:text-4xl"
+              >
+                The shape most of our platforms take
+              </AnchorHeading>
+              <p className="reveal reveal-d2 mt-4 max-w-xl text-base leading-relaxed text-ink-600">
+                Clients hit an edge, not an origin. One gateway owns authentication and rate limits. Services own their
+                own data and talk over an event bus. Nothing here is exotic — it is the boring, well-understood shape
+                that keeps running at 3am.
+              </p>
+            </div>
+            <div className="reveal reveal-d2 flex flex-col items-start gap-3 lg:items-end">
+              <VersionTag version="rev. 7" />
+              <CommitRef path="spec/architecture" hash="c9b0e13" />
+            </div>
+          </div>
+
+          <div className="reveal reveal-d2">
+            <ArchitectureDiagram />
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════ 3c. CODE — request, response, infra, CI */}
+      <section id="engineering" className="section">
+        <div className="container">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
+            <div>
+              <SpecLabel index="04" className="reveal">Inside The Work</SpecLabel>
+              <AnchorHeading
+                id="inside-the-work"
+                className="reveal reveal-d1 mt-5 max-w-2xl text-3xl font-semibold leading-[1.1] sm:text-4xl"
+              >
+                What you actually receive
+              </AnchorHeading>
+              <p className="reveal reveal-d2 mt-4 max-w-xl text-base leading-relaxed text-ink-600">
+                Typed API contracts, idempotent writes, infrastructure described in code and a pipeline that gates
+                itself. The samples below are written in the style we hand over.
+              </p>
+            </div>
+            <MonoEyebrow className="reveal reveal-d2">~/examples</MonoEyebrow>
+          </div>
+
+          <div className="grid min-w-0 gap-6 lg:grid-cols-2">
+            <CodeBlock
+              className="reveal"
+              lang="http"
+              filename="POST /v1/bookings — request"
+              meta="HTTP"
+              code={apiRequestSample}
+              caption="An idempotency key means a retried request can never double-book a slot."
+            />
+            <CodeBlock
+              className="reveal reveal-d1"
+              lang="http"
+              filename="201 Created — response"
+              meta="118 ms"
+              code={apiResponseSample}
+              caption="Timing and trace identifiers ship with the response, so a slow call can be explained rather than guessed at."
+            />
+          </div>
+
+          <div className="mt-6 grid min-w-0 gap-6 lg:grid-cols-2">
+            <CodeBlock
+              className="reveal"
+              lang="ts"
+              filename="services/orders/bookings/route.ts"
+              meta="TypeScript"
+              code={handlerSample}
+              caption="The write path: validate, lock, transact, publish. Every step is traced."
+            />
+            <div className="grid min-w-0 gap-6">
+              <CodeBlock
+                className="reveal reveal-d1"
+                lang="hcl"
+                filename="infrastructure/production/service.tf"
+                meta="Terraform"
+                code={infraSample}
+                caption="Environments are reviewed like application code — no manual console changes."
+              />
+            </div>
+          </div>
+
+          <div className="mt-6 grid min-w-0 gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+            <CodeBlock
+              className="reveal"
+              lang="yaml"
+              filename=".github/workflows/delivery.yml"
+              meta="CI"
+              code={ciSample}
+              caption="Lint, types, tests, accessibility and dependency audit all block the pipeline."
+            />
+
+            <div className="reveal reveal-d1 min-w-0">
+              <p className="spec-key text-ink-500">Engineering standards</p>
+              <dl className="mt-4 border-t border-line">
+                {engineeringStandards.map((standard) => (
+                  <div key={standard.ref} className="grid gap-x-6 gap-y-1 border-b border-line py-4 sm:grid-cols-[6.5rem_1fr]">
+                    <dt className="font-mono text-[11px] leading-5 text-accent">{standard.ref}</dt>
+                    <dd>
+                      <span className="block text-sm font-semibold text-ink-900">{standard.title}</span>
+                      <span className="mt-1 block text-[13px] leading-relaxed text-ink-600">{standard.text}</span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════════════════════════ 4. WHY US — sticky heading + list */}
       <section className="section border-y border-line bg-band">
         <div className="container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SpecLabel index="02" className="reveal">Why Nexora</SpecLabel>
+            <SpecLabel index="05" className="reveal">Why Nexora</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.1] sm:text-4xl">
               Most engagements continue because the working relationship is predictable.
             </h2>
@@ -187,28 +370,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════ 5. TECH STACK — marquee rails */}
-      <section className="section overflow-hidden">
+      {/* ═══════════════════════════════ 5. TECH STACK — layer matrix */}
+      <section id="stack" className="section">
         <div className="container">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <SpecLabel index="03" className="reveal">Technology Stack</SpecLabel>
-              <h2 className="reveal reveal-d1 mt-5 max-w-xl text-3xl font-semibold leading-[1.1] sm:text-4xl">
+              <SpecLabel index="06" className="reveal">Technology Stack</SpecLabel>
+              <AnchorHeading
+                id="stack-matrix"
+                className="reveal reveal-d1 mt-5 max-w-xl text-3xl font-semibold leading-[1.1] sm:text-4xl"
+              >
                 Proven tools, chosen for the problem
-              </h2>
+              </AnchorHeading>
             </div>
             <p className="reveal reveal-d2 max-w-sm text-sm leading-relaxed text-ink-600">
-              We standardise where it helps and stay pragmatic where it matters.
+              Grouped by the layer it sits in, so you can see where a choice applies. Text names only — we do not
+              display third-party logos or claim partnerships we do not have.
             </p>
           </div>
-        </div>
 
-        <div className="reveal reveal-d2 mt-12">
-          <TechRails />
-        </div>
-
-        <div className="container">
-          <Note>{techStackDisclaimer}</Note>
+          <StackMatrix className="mt-10" />
         </div>
       </section>
 
@@ -217,7 +398,7 @@ export default function HomePage() {
         <div className="container">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <div>
-              <SpecLabel index="04" className="reveal">Industries</SpecLabel>
+              <SpecLabel index="07" className="reveal">Industries</SpecLabel>
               <h2 className="reveal reveal-d1 mt-5 max-w-xl text-3xl font-semibold leading-[1.1] sm:text-4xl">
                 Domain context, not generic delivery
               </h2>
@@ -236,7 +417,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <div className="mb-14 max-w-3xl">
-            <SpecLabel index="05" className="reveal">How We Work</SpecLabel>
+            <SpecLabel index="08" className="reveal">How We Work</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.1] sm:text-4xl">
               Seven stages, each with a decision point
             </h2>
@@ -252,7 +433,7 @@ export default function HomePage() {
         <div className="container">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <div>
-              <SpecLabel index="06" className="reveal">Case Studies</SpecLabel>
+              <SpecLabel index="09" className="reveal">Case Studies</SpecLabel>
               <h2 className="reveal reveal-d1 mt-5 max-w-xl text-3xl font-semibold leading-[1.1] sm:text-4xl">
                 Selected project examples
               </h2>
@@ -276,7 +457,7 @@ export default function HomePage() {
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
             <figure className="reveal">
-              <SpecLabel index="07">Client Feedback</SpecLabel>
+              <SpecLabel index="10">Client Feedback</SpecLabel>
               <Icon name="quote" className="mt-8 h-10 w-10 text-accent" />
               <blockquote className="mt-5 font-display text-2xl font-medium leading-[1.35] text-ink-900 sm:text-[2rem]">
                 “{leadQuote.quote}”
@@ -323,7 +504,7 @@ export default function HomePage() {
         <div className="container">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <div>
-              <SpecLabel index="08" className="reveal">Technology Insights</SpecLabel>
+              <SpecLabel index="11" className="reveal">Technology Insights</SpecLabel>
               <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.1] sm:text-4xl">
                 Notes from our engineering practice
               </h2>
@@ -393,7 +574,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SpecLabel index="09" className="reveal">FAQ</SpecLabel>
+            <SpecLabel index="12" className="reveal">FAQ</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.1] sm:text-4xl">
               Questions we are asked before every engagement
             </h2>
@@ -416,7 +597,7 @@ export default function HomePage() {
         <div className="container">
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
             <div>
-              <SpecLabel index="10" className="reveal">Contact</SpecLabel>
+              <SpecLabel index="13" className="reveal">Contact</SpecLabel>
               <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.1] sm:text-4xl">
                 Start a conversation
               </h2>

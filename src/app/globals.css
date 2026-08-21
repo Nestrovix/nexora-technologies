@@ -5,7 +5,8 @@
 /* ============================================================
    NEXORA — SPEC-SHEET IDENTITY
    Light technical ground, hairline structure, one teal accent.
-   Chivo carries display type; Public Sans carries body and UI.
+   Manrope carries display type, Public Sans body and UI, Fira Code every
+   code, terminal, diagram and metric surface.
    ============================================================ */
 
 @layer base {
@@ -14,6 +15,8 @@
     --band: #f2f4f7;
     --line: #d9dee7;
     --accent: #0f766e;
+    --term-bg: #0b1120;
+    --term-line: #26324a;
   }
 
   * {
@@ -235,6 +238,96 @@
 
   .label {
     @apply spec-key mb-2 block;
+  }
+
+  /* ---------- Engineering furniture ------------------------------------ */
+
+  /*
+   * Monospace eyebrow — `~/services` style. Used where the label should read
+   * as something typed rather than typeset.
+   */
+  .mono-eyebrow {
+    @apply inline-flex w-fit items-center gap-2 font-mono text-[11px] font-medium leading-none text-ink-600;
+    letter-spacing: 0.06em;
+  }
+
+  /* Version tag — `v2.4.1`. A bordered monospace chip. */
+  .tag-version {
+    @apply inline-flex items-center gap-1.5 rounded-sm border border-line bg-band px-2 py-1 font-mono text-[11px] font-medium leading-none text-ink-700;
+  }
+
+  /* Commit-hash reference — `a41f9c2`. */
+  .commit-ref {
+    @apply font-mono text-[11px] leading-none text-ink-500;
+    letter-spacing: 0.02em;
+  }
+
+  /* `#` deep-link that appears beside a section heading. */
+  .anchor-hash {
+    @apply ml-3 align-middle font-mono text-[0.6em] font-normal text-ink-500 opacity-0 transition-opacity;
+  }
+  h2:hover > .anchor-hash,
+  h3:hover > .anchor-hash,
+  .anchor-hash:focus-visible {
+    @apply opacity-100;
+  }
+
+  /* Inline code inside prose. */
+  .code-inline {
+    @apply rounded-sm border border-line bg-band px-1.5 py-0.5 font-mono text-[0.85em] text-ink-800;
+  }
+
+  /* ---------- Dark panels: terminal, code, status ---------------------- */
+
+  /*
+   * `.panel-dark` is the shared ground for every engineering artefact. It is
+   * deliberately the only dark surface in the design, so code reads as code.
+   */
+  .panel-dark {
+    @apply border border-term-line bg-term-bg;
+  }
+
+  .panel-dark__bar {
+    @apply flex items-center gap-3 border-b border-term-line bg-term-chrome px-3 py-2.5 sm:px-4;
+  }
+
+  .panel-dark__name {
+    @apply truncate font-mono text-[11px] leading-none text-term-dim;
+  }
+
+  /*
+   * Scroll container for wide code. `overflow-x:auto` plus `min-width:0` keeps
+   * a long line inside the panel instead of widening the page.
+   */
+  .code-scroll {
+    @apply min-w-0 overflow-x-auto;
+    scrollbar-width: thin;
+    scrollbar-color: #3a4761 var(--term-bg);
+  }
+  .code-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  .code-scroll::-webkit-scrollbar-track {
+    background: var(--term-bg);
+  }
+  .code-scroll::-webkit-scrollbar-thumb {
+    background: #3a4761;
+    border: 2px solid var(--term-bg);
+  }
+
+  .code-body {
+    @apply block whitespace-pre font-mono text-[12.5px] leading-[1.75] text-term-text sm:text-[13px];
+    tab-size: 2;
+  }
+
+  /* Line-number gutter rendered as a leading span on each row. */
+  .code-ln {
+    @apply select-none text-term-dim;
+  }
+
+  /* Status dot used by the metrics panel and the pipeline strip. */
+  .dot {
+    @apply inline-block h-2 w-2 shrink-0 rounded-full;
   }
 }
 

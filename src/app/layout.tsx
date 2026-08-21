@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Chivo, Public_Sans } from 'next/font/google';
+import { Fira_Code, Manrope, Public_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -14,11 +14,19 @@ const body = Public_Sans({
   weight: ['400', '500', '600', '700'],
 });
 
-const display = Chivo({
+const display = Manrope({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-display',
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
+});
+
+/** Fira Code carries every code, terminal, diagram and metric block. */
+const mono = Fira_Code({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+  weight: ['400', '500', '600'],
 });
 
 export const viewport: Viewport = {
@@ -60,10 +68,10 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        url: '/assets/images/hero/hero-global-technology-network.webp',
+        url: '/assets/images/hero/hero-engineering-floor.webp',
         width: 1920,
         height: 1080,
-        alt: 'Nexora Technologies — enterprise technology services',
+        alt: 'Nexora Technologies — engineers at work on production systems',
       },
     ],
   },
@@ -71,7 +79,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${site.name} | IT Services & Software Development`,
     description: site.description,
-    images: ['/assets/images/hero/hero-global-technology-network.webp'],
+    images: ['/assets/images/hero/hero-engineering-floor.webp'],
   },
   robots: {
     index: true,
@@ -124,7 +132,7 @@ const websiteSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${body.variable} ${display.variable}`}>
+    <html lang="en-IN" className={`${body.variable} ${display.variable} ${mono.variable}`}>
       <head>
         {/* Without JS the scroll-reveal classes would keep content hidden. */}
         <noscript>

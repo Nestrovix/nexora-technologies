@@ -111,7 +111,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
         <span className="mx-auto grid h-14 w-14 place-items-center rounded-sm bg-accent-50 text-ink-700">
           <Icon name="alert" className="h-7 w-7" />
         </span>
-        <h3 className="mt-5 text-xl font-semibold">Validation passed — preview build</h3>
+        <h2 className="mt-5 text-xl font-semibold">Validation passed — preview build</h2>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-600">
           This is the static preview export, which has no server, so nothing was actually sent. Run the full app
           (<code className="font-mono text-ink-700">npm run dev</code>) or set{' '}
@@ -131,7 +131,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
         <span className="mx-auto grid h-14 w-14 place-items-center rounded-sm bg-accent-50 text-accent">
           <Icon name="check" className="h-7 w-7" />
         </span>
-        <h3 className="mt-5 text-xl font-semibold">Enquiry received</h3>
+        <h2 className="mt-5 text-xl font-semibold">Enquiry received</h2>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-600">
           Thank you! Your project enquiry has been received. Our team will contact you shortly.
         </p>
@@ -144,9 +144,9 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
 
   return (
     <form onSubmit={onSubmit} noValidate className="plate rounded-2xl p-5 sm:p-7" aria-labelledby={`${uid}-title`}>
-      <h3 id={`${uid}-title`} className="text-xl font-semibold">
+      <h2 id={`${uid}-title`} className="text-xl font-semibold">
         Project Enquiry
-      </h3>
+      </h2>
       <p className="mt-2 text-sm text-ink-600">
         Tell us about your project. Fields marked <span className="text-accent">*</span> are required.
       </p>
