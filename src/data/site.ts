@@ -54,9 +54,6 @@ export const site = {
       { days: 'Saturday', time: '10:00 AM – 2:00 PM IST' },
       { days: 'Sunday', time: 'Closed (24/7 support for managed clients)' },
     ],
-    // PLACEHOLDER map embed — replace `q=` with the real office address.
-    mapEmbed:
-      'https://maps.google.com/maps?q=Outer+Ring+Road,+Bengaluru,+Karnataka&t=&z=13&ie=UTF8&iwloc=&output=embed',
   },
   social: {
     // PLACEHOLDER social profiles — replace with the company's real handles.

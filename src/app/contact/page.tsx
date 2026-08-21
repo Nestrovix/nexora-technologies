@@ -121,49 +121,18 @@ export default function ContactPage() {
               <div className="reveal reveal-d2 overflow-hidden rounded-2xl border border-white/10">
                 <h2 className="px-6 pt-6 text-lg font-semibold">Find us</h2>
                 <p className="px-6 pb-4 pt-1 text-xs text-ink-500">
-                  Placeholder map location — update the embed with the real office address.
+                  Demo location — this build carries no real office address.
                 </p>
                 <div className="relative h-72 w-full bg-navy-800">
-                  {/* Fallback shown if the map embed is blocked by the browser or network */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center">
                     <span className="grid h-11 w-11 place-items-center rounded-xl bg-electric-500/10 text-electric-400">
                       <Icon name="pin" className="h-5 w-5" />
                     </span>
                     <p className="text-sm text-ink-300">{site.contact.addressLines.join(', ')}</p>
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                        site.contact.addressLines.join(', '),
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-arrow"
-                    >
-                      Open in Google Maps
-                      <Icon name="arrow" className="h-4 w-4" />
-                    </a>
                   </div>
-                  <iframe
-                    title="Nexora Technologies office location on Google Maps"
-                    src={site.contact.mapEmbed}
-                    className="absolute inset-0 h-full w-full border-0 grayscale-[0.35]"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                  />
                 </div>
                 <div className="flex items-center justify-between gap-3 border-t border-white/10 px-6 py-4">
                   <p className="text-xs text-ink-500">Bengaluru, Karnataka, India</p>
-                  <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                      site.contact.addressLines.join(', '),
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-arrow"
-                  >
-                    Open in Google Maps
-                    <Icon name="arrow" className="h-4 w-4" />
-                  </a>
                 </div>
               </div>
             </div>
@@ -171,7 +140,7 @@ export default function ContactPage() {
 
           <Note>
             <strong className="font-semibold">Placeholder contact details:</strong> the phone number, email addresses,
-            postal address and map location above are placeholders. Replace them in{' '}
+            postal address above are demo values. Replace them in{' '}
             <code className="font-mono">src/data/site.ts</code> with verified company information before publishing.
           </Note>
         </div>

@@ -216,7 +216,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
             value={values.email}
             onChange={set('email')}
             className={`field ${errors.email ? 'field-error' : ''}`}
-            placeholder="name@company.com"
+            placeholder="name@example.com"
             {...errorProps('email')}
           />
           {errors.email && (

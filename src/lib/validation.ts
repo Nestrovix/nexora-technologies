@@ -35,7 +35,7 @@ export function validateEnquiry(data: Partial<EnquiryPayload>) {
   else if (data.fullName.trim().length < 2) errors.fullName = 'Name must be at least 2 characters.';
 
   if (!data.email?.trim()) errors.email = 'Please enter your email address.';
-  else if (!EMAIL_RE.test(data.email.trim())) errors.email = 'Enter a valid email address, e.g. name@company.com.';
+  else if (!EMAIL_RE.test(data.email.trim())) errors.email = 'Enter a valid email address, e.g. name@example.com.';
 
   if (!data.phone?.trim()) errors.phone = 'Please enter your phone number.';
   else if (!PHONE_RE.test(data.phone.trim()) || digits(data.phone).length < 8 || digits(data.phone).length > 15)
