@@ -2,10 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   NEXORA — SPEC-SHEET IDENTITY
+   Light technical ground, hairline structure, one teal accent.
+   Chivo carries display type; Public Sans carries body and UI.
+   ============================================================ */
+
 @layer base {
   :root {
-    --shell: #050b1c;
-    --radius-card: 1.25rem;
+    --paper: #ffffff;
+    --band: #f2f4f7;
+    --line: #d9dee7;
+    --accent: #0f766e;
   }
 
   * {
@@ -15,176 +23,256 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
+    background-color: var(--paper);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
     }
   }
 
+  /* Graph-paper ground: 24px minor cells inside a 120px major division. */
   body {
-    @apply bg-navy-950 text-ink-200 font-sans antialiased;
+    @apply bg-paper font-sans text-ink-600 antialiased;
     overflow-x: hidden;
+    background-image:
+      linear-gradient(to right, rgba(11, 17, 32, 0.075) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 17, 32, 0.075) 1px, transparent 1px),
+      linear-gradient(to right, rgba(11, 17, 32, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 17, 32, 0.04) 1px, transparent 1px);
+    background-size:
+      120px 120px,
+      120px 120px,
+      24px 24px,
+      24px 24px;
+    background-position: 0 0;
   }
 
-  h1, h2, h3, h4, h5 {
-    @apply font-display text-white tracking-tight;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-display text-ink-900;
+    letter-spacing: -0.015em;
     text-wrap: balance;
   }
 
-  p { text-wrap: pretty; }
-
-  :focus-visible {
-    outline: 2px solid #4da6ff;
-    outline-offset: 3px;
-    border-radius: 4px;
+  p {
+    text-wrap: pretty;
   }
 
-  ::selection { background: rgba(31, 139, 255, 0.35); color: #fff; }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 0;
+  }
 
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: #050b1c; }
-  ::-webkit-scrollbar-thumb { background: #17264a; border-radius: 999px; }
-  ::-webkit-scrollbar-thumb:hover { background: #24365f; }
+  ::selection {
+    background: rgba(15, 118, 110, 0.18);
+    color: #0b1120;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--band);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #c3cad6;
+    border: 3px solid var(--band);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a9b3c3;
+  }
 }
 
 @layer components {
-  .glass {
-    @apply border border-white/10 bg-white/[0.045] backdrop-blur-xl;
+  /* ---------- Surfaces ------------------------------------------------- */
+
+  /* A bordered plate. Replaces the old translucent "glass" card. */
+  .plate {
+    @apply border border-line bg-paper;
   }
 
-  .glass-strong {
-    @apply border border-white/10 bg-white/[0.07] backdrop-blur-2xl;
+  .plate-band {
+    @apply border border-line bg-band;
   }
 
   .card-hover {
-    @apply transition duration-500 ease-premium hover:-translate-y-1.5 hover:border-electric-400/40 hover:bg-white/[0.075];
+    @apply transition-colors duration-300 ease-premium hover:border-ink-900;
   }
 
   .section {
     @apply py-20 md:py-28;
   }
 
+  /* ---------- Section labels ------------------------------------------ */
+
+  /*
+   * `01 / SERVICES` — tracked uppercase Public Sans (not a monospace face).
+   * The index and the slash are rendered by the SpecLabel component so the
+   * numeral can be tinted independently.
+   */
+  .spec-label {
+    @apply inline-flex w-fit items-baseline gap-2 font-sans text-[11px] font-semibold uppercase leading-none text-ink-900;
+    letter-spacing: 0.22em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .spec-label__index {
+    @apply text-accent;
+  }
+
+  .spec-label__slash {
+    @apply font-normal text-ink-500;
+  }
+
+  /* Smaller sub-label used inside spec blocks and table headers. */
+  .spec-key {
+    @apply text-[10px] font-semibold uppercase leading-none text-ink-500;
+    letter-spacing: 0.2em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Legacy hook — anything still using `.eyebrow` gets the label treatment. */
   .eyebrow {
-    @apply inline-flex w-fit items-center gap-2 rounded-full border border-electric-400/25 bg-electric-500/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-electric-400;
+    @apply spec-label;
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-white via-electric-400 to-violet-400 bg-clip-text text-transparent;
+  /* ---------- Spec blocks --------------------------------------------- */
+
+  /*
+   * A hairline grid of bordered blocks. The wrapper paints the rule colour and
+   * a 1px gap lets it show through, so interior rules are never doubled.
+   */
+  .spec-grid {
+    @apply grid gap-px border border-line bg-line;
   }
 
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-300 ease-premium disabled:cursor-not-allowed disabled:opacity-60;
+  .spec-block {
+    @apply flex flex-col bg-paper p-6 transition-colors duration-300 sm:p-7;
   }
 
-  .btn-primary {
-    @apply btn bg-gradient-to-r from-electric-500 to-violet-500 text-white shadow-glow hover:brightness-110 hover:shadow-[0_20px_50px_-18px_rgba(31,139,255,0.8)];
+  .spec-block:hover {
+    @apply bg-band;
   }
 
-  .btn-ghost {
-    @apply btn border border-white/20 bg-white/[0.04] text-white hover:border-electric-400/50 hover:bg-white/[0.09];
+  /* label → value table inside a spec block */
+  .spec-table {
+    @apply mt-5 border-t border-line;
   }
 
-  .btn-light {
-    @apply btn bg-white text-navy-900 hover:bg-ink-100;
+  .spec-table > div {
+    @apply grid grid-cols-[5.5rem_1fr] gap-x-4 border-b border-line py-2.5 sm:grid-cols-[6.5rem_1fr];
   }
 
-  .link-arrow {
-    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-electric-400 transition hover:gap-2.5 hover:text-electric-400/80;
+  .spec-table dt {
+    @apply spec-key pt-1;
   }
 
-  .field {
-    @apply w-full rounded-xl border border-white/10 bg-navy-900/60 px-4 py-3 text-sm text-white placeholder:text-ink-500 transition focus:border-electric-400/60 focus:bg-navy-900 focus:outline-none focus:ring-2 focus:ring-electric-500/30;
+  .spec-table dd {
+    @apply text-[13px] leading-snug text-ink-700;
   }
 
-  .field-error { @apply border-red-400/60 focus:ring-red-400/25; }
+  /* ---------- Data records -------------------------------------------- */
 
-  .label { @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-ink-400; }
-}
-
-@layer utilities {
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-    will-change: opacity, transform;
-  }
-  .reveal.is-visible { opacity: 1; transform: none; }
-  .reveal-d1 { transition-delay: 90ms; }
-  .reveal-d2 { transition-delay: 180ms; }
-  .reveal-d3 { transition-delay: 270ms; }
-  .reveal-d4 { transition-delay: 360ms; }
-  .reveal-d5 { transition-delay: 450ms; }
-
-  .mask-fade-b {
-    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
-    mask-image: linear-gradient(to bottom, #000 55%, transparent);
-  }
-
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-}
-
-/* ============================================================
-   LAYOUT SYSTEM — section shapes
-   Each homepage/section type below has a deliberately different
-   structure so no two blocks read as the same shape.
-   ============================================================ */
-
-@layer components {
-  /* Hairline rule used instead of cards in editorial lists */
+  /* Hairline row used by editorial lists and case-study records. */
   .rule-row {
-    @apply border-t border-white/10 transition-colors duration-500;
+    @apply border-t border-line transition-colors duration-300;
   }
   .rule-row:last-child {
     @apply border-b;
   }
 
-  /* Oversized index numeral for editorial lists */
+  /* Index numeral — tabular, tracked, accent-tinted. */
   .idx {
-    @apply font-display text-[13px] font-semibold tabular-nums tracking-[0.2em] text-electric-400;
+    @apply font-sans text-[12px] font-semibold tabular-nums text-accent;
+    letter-spacing: 0.18em;
   }
 
-  /* Bento tile */
-  .bento {
-    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition duration-500 ease-premium hover:border-electric-400/40;
+  /* ---------- Controls ------------------------------------------------- */
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-[13px] font-semibold uppercase leading-none transition duration-200 ease-premium disabled:cursor-not-allowed disabled:opacity-60;
+    letter-spacing: 0.08em;
   }
 
-  /* Full-bleed feature row media */
-  .bleed-media {
-    @apply relative overflow-hidden rounded-2xl border border-white/10;
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-700;
+  }
+
+  .btn-ghost {
+    @apply btn border border-line bg-paper text-ink-900 hover:border-ink-900 hover:bg-band;
+  }
+
+  .btn-light {
+    @apply btn border border-ink-900 bg-ink-900 text-white hover:bg-ink-800;
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-[13px] font-semibold uppercase text-accent underline-offset-4 transition hover:text-accent-700 hover:underline;
+    letter-spacing: 0.08em;
+  }
+
+  .field {
+    @apply w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-sm text-ink-900 transition placeholder:text-ink-500 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
+  }
+
+  .field-error {
+    @apply border-red-600 focus:border-red-600 focus:ring-red-600;
+  }
+
+  .label {
+    @apply spec-key mb-2 block;
   }
 }
 
 @layer utilities {
-  .marquee-track {
-    animation: marquee-x 42s linear infinite;
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
   }
-  .marquee-track-rev {
-    animation: marquee-x 52s linear infinite reverse;
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
   }
-  .marquee-mask {
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  .reveal-d1 {
+    transition-delay: 60ms;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track,
-    .marquee-track-rev {
-      animation: none;
-    }
+  .reveal-d2 {
+    transition-delay: 120ms;
+  }
+  .reveal-d3 {
+    transition-delay: 180ms;
+  }
+  .reveal-d4 {
+    transition-delay: 240ms;
+  }
+  .reveal-d5 {
+    transition-delay: 300ms;
   }
 
-  .diag-top {
-    clip-path: polygon(0 3.5rem, 100% 0, 100% 100%, 0 100%);
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-
-  .text-outline {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
-    color: transparent;
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   .snap-x-rail {
@@ -193,9 +281,34 @@
   .snap-x-rail > * {
     scroll-snap-align: start;
   }
-}
 
-@keyframes marquee-x {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
+  /* Corner ticks — a drafting cue used on masthead plates. */
+  .ticked {
+    position: relative;
+  }
+  .ticked::before,
+  .ticked::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-color: var(--accent);
+    pointer-events: none;
+  }
+  .ticked::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+  }
+  .ticked::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+  }
+
+  .tabnum {
+    font-variant-numeric: tabular-nums;
+  }
 }

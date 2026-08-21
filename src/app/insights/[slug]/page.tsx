@@ -64,16 +64,16 @@ export default async function InsightPage({ params }: Params) {
           <nav aria-label="Breadcrumb" className="reveal mb-6">
             <ol className="flex flex-wrap items-center gap-2 text-xs text-ink-500">
               <li>
-                <Link href="/" className="transition hover:text-electric-400">Home</Link>
+                <Link href="/" className="transition hover:text-accent">Home</Link>
               </li>
               <li className="flex items-center gap-2">
                 <Icon name="arrow" className="h-3 w-3 opacity-50" />
-                <Link href="/insights" className="transition hover:text-electric-400">Insights</Link>
+                <Link href="/insights" className="transition hover:text-accent">Insights</Link>
               </li>
             </ol>
           </nav>
-          <div className="reveal flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-wider">
-            <span className="rounded-full bg-electric-500/10 px-2.5 py-1 text-electric-400">{post.category}</span>
+          <div className="reveal flex flex-wrap items-center gap-3 spec-key">
+            <span className="rounded-sm bg-accent-50 px-2.5 py-1 text-accent">{post.category}</span>
             <span className="text-ink-500">{formatDate(post.date)}</span>
             <span className="text-ink-500">·</span>
             <span className="text-ink-500">{post.readTime}</span>
@@ -81,13 +81,13 @@ export default async function InsightPage({ params }: Params) {
           <h1 className="reveal reveal-d1 mt-5 max-w-4xl text-3xl font-semibold leading-[1.12] sm:text-4xl lg:text-[3rem]">
             {post.title}
           </h1>
-          <p className="reveal reveal-d2 mt-5 max-w-2xl text-base leading-relaxed text-ink-300 sm:text-lg">{post.excerpt}</p>
+          <p className="reveal reveal-d2 mt-5 max-w-2xl text-base leading-relaxed text-ink-700 sm:text-lg">{post.excerpt}</p>
         </div>
       </section>
 
       <section className="pb-6">
         <div className="container">
-          <div className="reveal relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
+          <div className="reveal relative aspect-[16/9] overflow-hidden rounded-3xl border border-line">
             <Image src={post.image} alt={post.title} fill priority sizes="(max-width: 1240px) 100vw, 1200px" className="object-cover" />
           </div>
         </div>
@@ -97,13 +97,13 @@ export default async function InsightPage({ params }: Params) {
         <div className="container grid gap-12 lg:grid-cols-[15rem_1fr] lg:gap-16">
           {/* sticky contents rail */}
           <nav aria-label="Contents" className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-500">Contents</p>
+            <p className="spec-key text-ink-500">Contents</p>
             <ol className="mt-4">
               {post.body.map((block, i) => (
                 <li key={block.heading} className="rule-row">
                   <a
                     href={`#${block.heading.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                    className="group flex gap-3 py-3 text-sm text-ink-400 transition hover:text-white"
+                    className="group flex gap-3 py-3 text-sm text-ink-600 transition hover:text-ink-900"
                   >
                     <span className="idx">{String(i + 1).padStart(2, '0')}</span>
                     <span className="flex-1 leading-snug">{block.heading}</span>
@@ -111,9 +111,9 @@ export default async function InsightPage({ params }: Params) {
                 </li>
               ))}
             </ol>
-            <div className="mt-8 border-t border-white/10 pt-6">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-500">Written by</p>
-              <p className="mt-2 text-sm text-ink-200">{post.author}</p>
+            <div className="mt-8 border-t border-line pt-6">
+              <p className="spec-key text-ink-500">Written by</p>
+              <p className="mt-2 text-sm text-ink-800">{post.author}</p>
               <p className="mt-1 text-xs text-ink-500">{post.readTime}</p>
             </div>
           </nav>
@@ -130,15 +130,15 @@ export default async function InsightPage({ params }: Params) {
                   <h2 className="text-2xl font-semibold sm:text-3xl">{block.heading}</h2>
                 </div>
                 {block.paragraphs.map((p) => (
-                  <p key={p.slice(0, 24)} className="mt-4 text-base leading-[1.75] text-ink-300">
+                  <p key={p.slice(0, 24)} className="mt-4 text-base leading-[1.75] text-ink-700">
                     {p}
                   </p>
                 ))}
                 {block.bullets && (
                   <ul className="mt-5 space-y-2.5">
                     {block.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-3 text-[15px] text-ink-300">
-                        <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-electric-400" />
+                      <li key={b} className="flex items-start gap-3 text-[15px] text-ink-700">
+                        <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-accent" />
                         <span>{b}</span>
                       </li>
                     ))}
@@ -147,9 +147,9 @@ export default async function InsightPage({ params }: Params) {
               </div>
             ))}
 
-            <div className="glass mt-12 rounded-2xl p-6">
-              <p className="text-sm text-ink-400">
-                Written by <span className="font-semibold text-white">{post.author}</span>. If you would like to discuss
+            <div className="plate mt-12 rounded-2xl p-6">
+              <p className="text-sm text-ink-600">
+                Written by <span className="font-semibold text-ink-900">{post.author}</span>. If you would like to discuss
                 how this applies to your environment, we are happy to talk it through.
               </p>
               <Link href="/contact" className="link-arrow mt-4">
@@ -161,7 +161,7 @@ export default async function InsightPage({ params }: Params) {
         </div>
       </section>
 
-      <section className="section border-t border-white/10 bg-navy-900/30 py-16">
+      <section className="section border-t border-line bg-band py-16">
         <div className="container">
           <h2 className="reveal text-2xl font-semibold">More insights</h2>
           <ul className="reveal reveal-d1 mt-8">
@@ -169,7 +169,7 @@ export default async function InsightPage({ params }: Params) {
               <li key={item.slug} className="rule-row">
                 <Link href={`/insights/${item.slug}`} className="group flex items-center gap-5 py-5">
                   <span className="idx hidden sm:block">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-white/10">
+                  <span className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-line">
                     <Image
                       src={item.image}
                       alt=""
@@ -180,14 +180,14 @@ export default async function InsightPage({ params }: Params) {
                     />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[11px] font-semibold uppercase tracking-wider text-electric-400">
+                    <span className="block spec-key text-accent">
                       {item.category}
                     </span>
-                    <span className="mt-1 block font-display text-base font-semibold leading-snug text-ink-200 transition group-hover:text-white">
+                    <span className="mt-1 block font-display text-base font-semibold leading-snug text-ink-800 transition group-hover:text-ink-900">
                       {item.title}
                     </span>
                   </span>
-                  <Icon name="arrow" className="h-4 w-4 shrink-0 text-ink-500 transition group-hover:text-electric-400" />
+                  <Icon name="arrow" className="h-4 w-4 shrink-0 text-ink-500 transition group-hover:text-accent" />
                 </Link>
               </li>
             ))}

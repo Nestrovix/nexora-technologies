@@ -1,13 +1,39 @@
 import type { ReactNode } from 'react';
 
+/**
+ * Section label — `01 / SERVICES`.
+ * Tracked uppercase Public Sans with a leading index; no monospace, no pill.
+ */
+export function SpecLabel({
+  index,
+  children,
+  className = '',
+}: {
+  index: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <span className={`spec-label ${className}`}>
+      <span className="spec-label__index">{index}</span>
+      <span className="spec-label__slash" aria-hidden="true">
+        /
+      </span>
+      <span>{children}</span>
+    </span>
+  );
+}
+
 export function SectionHeading({
   eyebrow,
+  index = '01',
   title,
   description,
   align = 'left',
   className = '',
 }: {
   eyebrow?: string;
+  index?: string;
   title: ReactNode;
   description?: ReactNode;
   align?: 'left' | 'center';
@@ -15,38 +41,54 @@ export function SectionHeading({
 }) {
   return (
     <div className={`${align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl'} ${className}`}>
-      {eyebrow && <span className="eyebrow reveal">{eyebrow}</span>}
-      <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.15] sm:text-4xl lg:text-[2.6rem]">{title}</h2>
-      {description && <p className="reveal reveal-d2 mt-4 text-base leading-relaxed text-ink-400">{description}</p>}
+      {eyebrow && (
+        <SpecLabel index={index} className="reveal">
+          {eyebrow}
+        </SpecLabel>
+      )}
+      <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.12] sm:text-4xl lg:text-[2.5rem]">
+        {title}
+      </h2>
+      {description && <p className="reveal reveal-d2 mt-4 text-base leading-relaxed text-ink-600">{description}</p>}
     </div>
   );
 }
 
+/** Marks demo/sample content. A bordered tag, not a rounded pill. */
 export function SampleBadge({ label = 'Sample project', className = '' }: { label?: string; className?: string }) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border border-amber-300/30 bg-amber-300/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-amber-200 ${className}`}
+      className={`spec-key inline-flex items-center gap-1.5 rounded-sm border border-line bg-paper px-2 py-1.5 text-ink-700 ${className}`}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
+      <span className="h-1.5 w-1.5 bg-accent" aria-hidden="true" />
       {label}
     </span>
   );
 }
 
+/** Build note — an accent-ruled aside, kept visually distinct from body copy. */
 export function Note({ children }: { children: ReactNode }) {
   return (
-    <p className="mt-6 rounded-xl border border-amber-400/20 bg-amber-400/[0.06] px-4 py-3 text-xs leading-relaxed text-amber-200/80">
+    <p className="mt-8 border-y border-line border-l-2 border-l-accent bg-band px-4 py-3 text-xs leading-relaxed text-ink-700">
       {children}
     </p>
   );
 }
 
+/**
+ * Drafting rules — four faint vertical hairlines behind a masthead, aligned to
+ * the container. Replaces the old blurred colour blobs.
+ */
 export function GridBackdrop() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute inset-0 bg-grid-fade bg-grid opacity-40 mask-fade-b" />
-      <div className="absolute -left-40 top-10 h-[420px] w-[420px] rounded-full bg-electric-500/10 blur-[120px]" />
-      <div className="absolute -right-32 bottom-0 h-[380px] w-[380px] rounded-full bg-violet-600/10 blur-[120px]" />
+      <div className="container relative h-full">
+        <div className="grid h-full grid-cols-4">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="border-l border-line/70" />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

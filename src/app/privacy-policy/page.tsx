@@ -68,15 +68,15 @@ export default function PrivacyPolicyPage() {
           {sections.map((s) => (
             <div key={s.heading} className="reveal mt-10">
               <h2 className="text-xl font-semibold">{s.heading}</h2>
-              <p className="mt-3 text-base leading-relaxed text-ink-300">{s.body}</p>
+              <p className="mt-3 text-base leading-relaxed text-ink-700">{s.body}</p>
             </div>
           ))}
 
           <div className="reveal mt-10">
             <h2 className="text-xl font-semibold">Contact</h2>
-            <p className="mt-3 text-base leading-relaxed text-ink-300">
+            <p className="mt-3 text-base leading-relaxed text-ink-700">
               Questions about this policy can be sent to{' '}
-              <a href={`mailto:${site.contact.email}`} className="text-electric-400 underline-offset-4 hover:underline">
+              <a href={`mailto:${site.contact.email}`} className="text-accent underline-offset-4 hover:underline">
                 {site.contact.email}
               </a>
               , or by post to {site.contact.addressLines.join(', ')}.

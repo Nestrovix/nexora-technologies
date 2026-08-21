@@ -20,7 +20,7 @@ export default function ServiceIndex({ services }: { services: Service[] }) {
         {services.map((service, i) => (
           <li
             key={service.slug}
-            className={`rule-row group ${active === i ? 'border-white/25' : ''}`}
+            className={`rule-row group ${active === i ? 'border-ink-900' : ''}`}
             onMouseEnter={() => setActive(i)}
           >
             <Link
@@ -34,7 +34,7 @@ export default function ServiceIndex({ services }: { services: Service[] }) {
                 <span className="flex flex-wrap items-baseline gap-x-3">
                   <span
                     className={`font-display text-xl font-semibold transition-colors duration-300 sm:text-2xl ${
-                      active === i ? 'text-white' : 'text-ink-200 group-hover:text-white'
+                      active === i ? 'text-accent' : 'text-ink-900 group-hover:text-accent'
                     }`}
                   >
                     {service.title}
@@ -42,14 +42,14 @@ export default function ServiceIndex({ services }: { services: Service[] }) {
                 </span>
                 <span
                   className={`mt-1.5 block max-w-xl text-sm leading-relaxed transition-colors duration-300 ${
-                    active === i ? 'text-ink-300' : 'text-ink-500'
+                    active === i ? 'text-ink-700' : 'text-ink-600'
                   }`}
                 >
                   {service.short}
                 </span>
 
                 {/* Inline preview for small screens, where the sticky panel is hidden */}
-                <span className="relative mt-4 block aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/10 lg:hidden">
+                <span className="relative mt-4 block aspect-[16/9] w-full overflow-hidden rounded-xl border border-line lg:hidden">
                   <Image
                     src={service.image}
                     alt={`${service.title} at Nexora Technologies`}
@@ -58,15 +58,14 @@ export default function ServiceIndex({ services }: { services: Service[] }) {
                     sizes="100vw"
                     className="object-cover"
                   />
-                  <span className="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent" />
-                </span>
+                                  </span>
               </span>
 
               <span
-                className={`mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-full border transition duration-300 sm:mt-0 ${
+                className={`mt-1 grid h-10 w-10 shrink-0 place-items-center border transition duration-300 sm:mt-0 ${
                   active === i
-                    ? 'border-electric-400/50 bg-electric-500/15 text-electric-400'
-                    : 'border-white/10 text-ink-500 group-hover:text-electric-400'
+                    ? 'border-accent bg-accent text-white'
+                    : 'border-line text-ink-500 group-hover:border-accent group-hover:text-accent'
                 }`}
               >
                 <Icon name="arrow" className="h-4 w-4" />
@@ -79,7 +78,7 @@ export default function ServiceIndex({ services }: { services: Service[] }) {
       {/* Sticky preview — desktop only */}
       <div className="reveal reveal-d2 hidden lg:block">
         <div className="sticky top-28">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 shadow-card">
+          <div className="ticked relative aspect-[4/5] overflow-hidden border border-line bg-band">
             {services.map((service, i) => (
               <Image
                 key={service.slug}
@@ -91,21 +90,21 @@ export default function ServiceIndex({ services }: { services: Service[] }) {
                 className={`object-cover transition-opacity duration-500 ${active === i ? 'opacity-100' : 'opacity-0'}`}
               />
             ))}
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/25 to-transparent" />
+          </div>
 
-            <div className="absolute inset-x-0 bottom-0 p-7">
-              <span className="grid h-11 w-11 place-items-center rounded-xl border border-white/20 bg-navy-950/70 text-electric-400 backdrop-blur-md">
-                <Icon name={current.icon} className="h-5 w-5" />
-              </span>
-              <p className="mt-4 font-display text-2xl font-semibold text-white">{current.title}</p>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {current.technologies.slice(0, 4).map((t) => (
-                  <span key={t} className="rounded-md border border-white/10 bg-white/[0.06] px-2 py-1 text-[11px] text-ink-200">
-                    {t}
-                  </span>
-                ))}
+          <div className="border-x border-b border-line bg-paper p-6">
+            <p className="spec-key">Selected practice</p>
+            <p className="mt-2.5 font-display text-xl font-bold text-ink-900">{current.title}</p>
+            <dl className="spec-table">
+              <div>
+                <dt>Stack</dt>
+                <dd>{current.technologies.slice(0, 4).join(' · ')}</dd>
               </div>
-            </div>
+              <div>
+                <dt>Outputs</dt>
+                <dd>{current.features.length} defined deliverables</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </div>

@@ -76,7 +76,7 @@ export default function CaseStudyExplorer({ items, industriesList, servicesList,
 
   return (
     <div>
-      <div className="border-y border-white/10 py-6">
+      <div className="border-y border-line py-6">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <label htmlFor="cs-search" className="label">
@@ -100,8 +100,8 @@ export default function CaseStudyExplorer({ items, industriesList, servicesList,
         </div>
 
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-ink-400" role="status" aria-live="polite">
-            Showing <span className="font-semibold text-white">{filtered.length}</span> of {items.length} sample projects
+          <p className="text-sm text-ink-600" role="status" aria-live="polite">
+            Showing <span className="font-semibold text-ink-900">{filtered.length}</span> of {items.length} sample projects
           </p>
           {active && (
             <button type="button" onClick={reset} className="btn-ghost !px-4 !py-2 text-xs">
@@ -113,9 +113,9 @@ export default function CaseStudyExplorer({ items, industriesList, servicesList,
       </div>
 
       {filtered.length === 0 ? (
-        <div className="glass mt-8 rounded-2xl p-12 text-center">
-          <p className="text-base font-semibold text-white">No projects match those filters</p>
-          <p className="mx-auto mt-2 max-w-sm text-sm text-ink-400">
+        <div className="plate mt-8 p-12 text-center">
+          <p className="text-base font-semibold text-ink-900">No projects match those filters</p>
+          <p className="mx-auto mt-2 max-w-sm text-sm text-ink-600">
             Try clearing a filter, or tell us what you are looking for and we will share relevant work directly.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
@@ -128,45 +128,71 @@ export default function CaseStudyExplorer({ items, industriesList, servicesList,
           </div>
         </div>
       ) : (
-        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 border-t border-line">
+          {/* Column headings for the record list — desktop only */}
+          <div className="hidden grid-cols-[4rem_1fr_9rem_11rem_9rem] items-center gap-6 border-b border-line py-3 lg:grid">
+            <span className="spec-key">Rec</span>
+            <span className="spec-key">Project</span>
+            <span className="spec-key">Sector</span>
+            <span className="spec-key">Service</span>
+            <span className="spec-key">Duration</span>
+          </div>
+
           {filtered.map((project, i) => (
-            <article
-              key={project.slug}
-              className={`group glass card-hover overflow-hidden rounded-2xl ${
-                i === 0 ? 'md:col-span-2 md:grid md:grid-cols-2 md:items-stretch' : ''
-              }`}
-            >
-              <div className={`relative overflow-hidden ${i === 0 ? 'aspect-[16/10] md:aspect-auto md:min-h-[300px]' : 'aspect-[16/10]'}`}>
-                <Image
-                  src={project.image}
-                  alt={`${project.title} — sample project`}
-                  fill
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition duration-700 ease-premium group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent" />
-                <SampleBadge className="absolute left-4 top-4" />
-              </div>
-              <div className="p-6">
-                <div className="flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-wider">
-                  <span className="text-electric-400">{project.industry}</span>
-                  <span className="text-ink-500">·</span>
-                  <span className="text-ink-400">{project.service}</span>
+            <article key={project.slug} className="group border-b border-line transition-colors hover:bg-band">
+              <div className="grid gap-5 py-6 lg:grid-cols-[4rem_1fr_9rem_11rem_9rem] lg:items-start lg:gap-6">
+                <div className="flex items-center gap-3">
+                  <span className="idx tabnum">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="lg:hidden">
+                    <SampleBadge />
+                  </span>
                 </div>
-                <h3 className="mt-3 text-lg font-semibold">{project.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-ink-400">{project.summary}</p>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {project.technologies.slice(0, 4).map((t) => (
-                    <span key={t} className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[11px] text-ink-400">
-                      {t}
-                    </span>
-                  ))}
+
+                <div className="grid gap-4 sm:grid-cols-[9rem_1fr] sm:items-start">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-line bg-band">
+                    <Image
+                      src={project.image}
+                      alt={`${project.title} — sample project`}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 640px) 100vw, 144px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-lg font-bold leading-snug text-ink-900">{project.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-600">{project.summary}</p>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {project.technologies.slice(0, 4).map((t) => (
+                        <span
+                          key={t}
+                          className="rounded-sm border border-line bg-paper px-2 py-1 text-[12px] leading-none text-ink-700"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <Link href={`/case-studies/${project.slug}`} className="link-arrow mt-4">
+                      View Case Study
+                      <Icon name="arrow" className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </div>
-                <Link href={`/case-studies/${project.slug}`} className="link-arrow mt-5">
-                  View Case Study
-                  <Icon name="arrow" className="h-4 w-4" />
-                </Link>
+
+                <dl className="grid grid-cols-3 gap-4 lg:contents">
+                  <div>
+                    <dt className="spec-key lg:sr-only">Sector</dt>
+                    <dd className="mt-1.5 text-sm text-ink-800 lg:mt-0">{project.industry}</dd>
+                  </div>
+                  <div>
+                    <dt className="spec-key lg:sr-only">Service</dt>
+                    <dd className="mt-1.5 text-sm text-ink-800 lg:mt-0">{project.service}</dd>
+                  </div>
+                  <div>
+                    <dt className="spec-key lg:sr-only">Duration</dt>
+                    <dd className="tabnum mt-1.5 text-sm text-ink-800 lg:mt-0">{project.duration}</dd>
+                  </div>
+                </dl>
               </div>
             </article>
           ))}

@@ -10,7 +10,7 @@ export default function MilestoneRail({
   return (
     <div className="relative">
       <div
-        className="pointer-events-none absolute left-0 right-0 top-[9px] h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+        className="pointer-events-none absolute left-0 right-0 top-[9px] h-px bg-line"
         aria-hidden="true"
       />
       <ol
@@ -20,13 +20,13 @@ export default function MilestoneRail({
         {items.map((m, i) => (
           <li key={m.year} className="w-[74vw] shrink-0 sm:w-[300px] lg:w-auto lg:flex-1">
             <span
-              className={`relative z-10 block h-[18px] w-[18px] rounded-full border-2 ${
-                i === items.length - 1 ? 'border-electric-400 bg-electric-400' : 'border-white/30 bg-navy-950'
+              className={`relative z-10 block h-[18px] w-[18px] border-2 ${
+                i === items.length - 1 ? 'border-accent bg-accent' : 'border-ink-500 bg-paper'
               }`}
             />
-            <p className="mt-5 font-display text-2xl font-semibold text-white">{m.year}</p>
-            <h3 className="mt-1 text-sm font-semibold uppercase tracking-wider text-electric-400">{m.title}</h3>
-            <p className="mt-2.5 max-w-xs text-sm leading-relaxed text-ink-400">{m.text}</p>
+            <p className="tabnum mt-5 font-display text-2xl font-bold text-ink-900">{m.year}</p>
+            <h3 className="spec-key mt-2 text-accent">{m.title}</h3>
+            <p className="mt-2.5 max-w-xs text-sm leading-relaxed text-ink-600">{m.text}</p>
           </li>
         ))}
       </ol>

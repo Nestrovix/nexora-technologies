@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import PageIntro from '@/components/PageIntro';
 import Accordion from '@/components/Accordion';
 import CTASection from '@/components/CTASection';
+import { SpecLabel } from '@/components/Section';
 import { faqs } from '@/data/company';
 import { services } from '@/data/services';
 import { site } from '@/data/site';
@@ -34,7 +35,7 @@ export default function FaqPage() {
           <>
             Frequently asked
             <br />
-            <span className="gradient-text">questions</span>
+            <span className="text-accent">questions</span>
           </>
         }
         lead="Scoping, pricing, delivery and support — the questions that come up before most engagements."
@@ -52,11 +53,11 @@ export default function FaqPage() {
       <section className="section">
         <div className="container grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <span className="eyebrow reveal">General</span>
+            <SpecLabel index="02" className="reveal">General</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.1] sm:text-4xl">
               Working with Nexora
             </h2>
-            <p className="reveal reveal-d2 mt-4 max-w-sm text-sm leading-relaxed text-ink-400">
+            <p className="reveal reveal-d2 mt-4 max-w-sm text-sm leading-relaxed text-ink-600">
               Process, timelines, ownership and pricing — the ground rules of an engagement.
             </p>
           </div>
@@ -66,14 +67,14 @@ export default function FaqPage() {
         </div>
       </section>
 
-      <section className="section border-t border-white/10 bg-navy-900/30">
+      <section className="section border-t border-line bg-band">
         <div className="container grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <span className="eyebrow reveal">By Service</span>
+            <SpecLabel index="03" className="reveal">By Service</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.1] sm:text-4xl">
               Service-specific questions
             </h2>
-            <p className="reveal reveal-d2 mt-4 max-w-sm text-sm leading-relaxed text-ink-400">
+            <p className="reveal reveal-d2 mt-4 max-w-sm text-sm leading-relaxed text-ink-600">
               One common question from each {site.name} practice.
             </p>
           </div>

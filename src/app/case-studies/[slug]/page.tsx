@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Icon from '@/components/Icon';
 import CTASection from '@/components/CTASection';
-import { GridBackdrop, Note, SampleBadge } from '@/components/Section';
+import { GridBackdrop, Note, SampleBadge, SpecLabel } from '@/components/Section';
 import { caseStudies, getCaseStudy } from '@/data/case-studies';
 import { site } from '@/data/site';
 
@@ -48,11 +48,11 @@ export default async function CaseStudyPage({ params }: Params) {
           <nav aria-label="Breadcrumb" className="reveal mb-7">
             <ol className="flex flex-wrap items-center gap-2 text-xs text-ink-500">
               <li>
-                <Link href="/" className="transition hover:text-electric-400">Home</Link>
+                <Link href="/" className="transition hover:text-accent">Home</Link>
               </li>
               <li className="flex items-center gap-2">
                 <Icon name="arrow" className="h-3 w-3 opacity-50" />
-                <Link href="/case-studies" className="transition hover:text-electric-400">Case Studies</Link>
+                <Link href="/case-studies" className="transition hover:text-accent">Case Studies</Link>
               </li>
             </ol>
           </nav>
@@ -61,20 +61,20 @@ export default async function CaseStudyPage({ params }: Params) {
             <div>
               <div className="reveal flex flex-wrap items-center gap-3">
                 <SampleBadge />
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-electric-400">
+                <span className="spec-key text-accent">
                   {study.industry}
                 </span>
-                <span className="h-1 w-1 rounded-full bg-ink-500" />
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-ink-400">{study.service}</span>
+                <span className="h-1 w-1 rounded-sm bg-line" />
+                <span className="spec-key text-ink-600">{study.service}</span>
               </div>
 
               <h1 className="reveal reveal-d1 mt-6 text-[2.2rem] font-semibold leading-[1.04] tracking-[-0.02em] sm:text-5xl">
                 {study.title}
               </h1>
-              <p className="reveal reveal-d2 mt-5 max-w-xl text-base leading-relaxed text-ink-300">{study.summary}</p>
+              <p className="reveal reveal-d2 mt-5 max-w-xl text-base leading-relaxed text-ink-700">{study.summary}</p>
             </div>
 
-            <div className="reveal reveal-d2 relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/10 shadow-card">
+            <div className="reveal reveal-d2 relative aspect-[16/10] overflow-hidden rounded-3xl border border-line">
               <Image
                 src={study.image}
                 alt={`${study.title} — sample project visual`}
@@ -88,17 +88,17 @@ export default async function CaseStudyPage({ params }: Params) {
         </div>
 
         {/* results as a meta rail */}
-        <div className="relative border-y border-white/10 bg-navy-900/40">
+        <div className="relative border-y border-line bg-band">
           <div className="container">
-            <dl className="grid grid-cols-2 divide-white/10 lg:grid-cols-4 lg:divide-x">
+            <dl className="grid grid-cols-2 divide-line lg:grid-cols-4 lg:divide-x">
               <div className="reveal py-6 lg:pr-7">
-                <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-electric-400">Duration</dt>
-                <dd className="mt-1.5 font-display text-lg font-semibold text-white">{study.duration}</dd>
+                <dt className="spec-key text-accent">Duration</dt>
+                <dd className="mt-1.5 font-display text-lg font-semibold text-ink-900">{study.duration}</dd>
               </div>
               {study.results.map((r, i) => (
                 <div key={r.label} className={`reveal reveal-d${i + 1} py-6 lg:px-7 lg:last:pr-0`}>
-                  <dt className="font-display text-lg font-semibold text-white">{r.value}</dt>
-                  <dd className="mt-1.5 text-xs leading-snug text-ink-400">{r.label}</dd>
+                  <dt className="font-display text-lg font-semibold text-ink-900">{r.value}</dt>
+                  <dd className="mt-1.5 text-xs leading-snug text-ink-600">{r.label}</dd>
                 </div>
               ))}
             </dl>
@@ -111,15 +111,15 @@ export default async function CaseStudyPage({ params }: Params) {
         <div className="container">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
             {[
-              { n: '01', label: 'The Challenge', text: study.challenge, tone: 'text-red-300/80' },
-              { n: '02', label: 'Our Solution', text: study.solution, tone: 'text-emerald-300/80' },
+              { n: '01', label: 'The Challenge', text: study.challenge, tone: 'text-ink-900' },
+              { n: '02', label: 'Our Solution', text: study.solution, tone: 'text-accent' },
             ].map((block, i) => (
-              <div key={block.label} className={`reveal reveal-d${i} border-t border-white/15 pt-7`}>
+              <div key={block.label} className={`reveal reveal-d${i} border-t border-line pt-7`}>
                 <div className="flex items-center gap-4">
                   <span className="idx">{block.n}</span>
                   <h2 className={`text-sm font-semibold uppercase tracking-[0.18em] ${block.tone}`}>{block.label}</h2>
                 </div>
-                <p className="mt-5 text-base leading-[1.75] text-ink-300">{block.text}</p>
+                <p className="mt-5 text-base leading-[1.75] text-ink-700">{block.text}</p>
               </div>
             ))}
           </div>
@@ -127,17 +127,17 @@ export default async function CaseStudyPage({ params }: Params) {
           {/* Approach as a numbered rail */}
           <div className="mt-20 grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
             <div className="lg:sticky lg:top-28 lg:self-start">
-              <span className="eyebrow reveal">Approach</span>
+              <SpecLabel index="03" className="reveal">Approach</SpecLabel>
               <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold leading-[1.15] sm:text-3xl">
                 How the work was sequenced
               </h2>
               <div className="reveal reveal-d2 mt-8">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-500">Technologies</p>
+                <p className="spec-key text-ink-500">Technologies</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {study.technologies.map((t) => (
                     <span
                       key={t}
-                      className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-ink-200"
+                      className="rounded-lg border border-line bg-band px-3 py-1.5 text-xs text-ink-800"
                     >
                       {t}
                     </span>
@@ -150,7 +150,7 @@ export default async function CaseStudyPage({ params }: Params) {
               {study.approach.map((step, i) => (
                 <li key={step} className="rule-row flex gap-6 py-6">
                   <span className="idx pt-0.5">{String(i + 1).padStart(2, '0')}</span>
-                  <p className="text-[15px] leading-relaxed text-ink-300">{step}</p>
+                  <p className="text-[15px] leading-relaxed text-ink-700">{step}</p>
                 </li>
               ))}
             </ol>
@@ -164,7 +164,7 @@ export default async function CaseStudyPage({ params }: Params) {
       </section>
 
       {/* ── MORE WORK — hairline list with thumbnails */}
-      <section className="section border-t border-white/10 bg-navy-900/30">
+      <section className="section border-t border-line bg-band">
         <div className="container">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <h2 className="reveal text-2xl font-semibold sm:text-3xl">Other sample projects</h2>
@@ -178,7 +178,7 @@ export default async function CaseStudyPage({ params }: Params) {
               <li key={project.slug} className="rule-row">
                 <Link href={`/case-studies/${project.slug}`} className="group flex items-center gap-5 py-5">
                   <span className="idx hidden sm:block">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-white/10">
+                  <span className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-line">
                     <Image
                       src={project.image}
                       alt=""
@@ -189,14 +189,14 @@ export default async function CaseStudyPage({ params }: Params) {
                     />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[11px] font-semibold uppercase tracking-wider text-electric-400">
+                    <span className="block spec-key text-accent">
                       {project.industry}
                     </span>
-                    <span className="mt-1 block font-display text-base font-semibold text-ink-200 transition group-hover:text-white">
+                    <span className="mt-1 block font-display text-base font-semibold text-ink-800 transition group-hover:text-ink-900">
                       {project.title}
                     </span>
                   </span>
-                  <Icon name="arrow" className="h-4 w-4 shrink-0 text-ink-500 transition group-hover:text-electric-400" />
+                  <Icon name="arrow" className="h-4 w-4 shrink-0 text-ink-500 transition group-hover:text-accent" />
                 </Link>
               </li>
             ))}

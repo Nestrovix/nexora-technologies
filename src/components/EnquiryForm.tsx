@@ -107,15 +107,15 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
 
   if (status === 'preview') {
     return (
-      <div className="glass rounded-2xl p-8 text-center" role="status" aria-live="polite">
-        <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-amber-400/15 text-amber-300">
+      <div className="plate rounded-2xl p-8 text-center" role="status" aria-live="polite">
+        <span className="mx-auto grid h-14 w-14 place-items-center rounded-sm bg-accent-50 text-ink-700">
           <Icon name="alert" className="h-7 w-7" />
         </span>
         <h3 className="mt-5 text-xl font-semibold">Validation passed — preview build</h3>
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-400">
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-600">
           This is the static preview export, which has no server, so nothing was actually sent. Run the full app
-          (<code className="font-mono text-ink-300">npm run dev</code>) or set{' '}
-          <code className="font-mono text-ink-300">NEXT_PUBLIC_FORM_ENDPOINT</code> to a hosted form service to deliver
+          (<code className="font-mono text-ink-700">npm run dev</code>) or set{' '}
+          <code className="font-mono text-ink-700">NEXT_PUBLIC_FORM_ENDPOINT</code> to a hosted form service to deliver
           real enquiries.
         </p>
         <button type="button" onClick={() => setStatus('idle')} className="btn-ghost mt-6">
@@ -127,12 +127,12 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
 
   if (status === 'success') {
     return (
-      <div className="glass rounded-2xl p-8 text-center" role="status" aria-live="polite">
-        <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-500/15 text-emerald-300">
+      <div className="plate rounded-2xl p-8 text-center" role="status" aria-live="polite">
+        <span className="mx-auto grid h-14 w-14 place-items-center rounded-sm bg-accent-50 text-accent">
           <Icon name="check" className="h-7 w-7" />
         </span>
         <h3 className="mt-5 text-xl font-semibold">Enquiry received</h3>
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-400">
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-600">
           Thank you! Your project enquiry has been received. Our team will contact you shortly.
         </p>
         <button type="button" onClick={() => setStatus('idle')} className="btn-ghost mt-6">
@@ -143,12 +143,12 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="glass rounded-2xl p-5 sm:p-7" aria-labelledby={`${uid}-title`}>
+    <form onSubmit={onSubmit} noValidate className="plate rounded-2xl p-5 sm:p-7" aria-labelledby={`${uid}-title`}>
       <h3 id={`${uid}-title`} className="text-xl font-semibold">
         Project Enquiry
       </h3>
-      <p className="mt-2 text-sm text-ink-400">
-        Tell us about your project. Fields marked <span className="text-electric-400">*</span> are required.
+      <p className="mt-2 text-sm text-ink-600">
+        Tell us about your project. Fields marked <span className="text-accent">*</span> are required.
       </p>
 
       <div ref={liveRef} aria-live="assertive" className="sr-only">
@@ -156,7 +156,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
       </div>
 
       {status === 'error' && (
-        <div className="mt-5 flex gap-3 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+        <div className="mt-5 flex gap-3 rounded-xl border border-red-600 bg-red-50 px-4 py-3 text-sm text-red-700">
           <Icon name="alert" className="mt-0.5 h-4 w-4 shrink-0" />
           <p>{serverMessage}</p>
         </div>
@@ -165,7 +165,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
       <div className={`mt-6 grid gap-4 ${compact ? '' : 'sm:grid-cols-2'}`}>
         <div>
           <label className="label" htmlFor={fieldId('fullName')}>
-            Full Name <span className="text-electric-400">*</span>
+            Full Name <span className="text-accent">*</span>
           </label>
           <input
             id={fieldId('fullName')}
@@ -180,7 +180,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
             {...errorProps('fullName')}
           />
           {errors.fullName && (
-            <p id={`${fieldId('fullName')}-error`} className="mt-1.5 text-xs text-red-300">
+            <p id={`${fieldId('fullName')}-error`} className="mt-1.5 text-xs text-red-700">
               {errors.fullName}
             </p>
           )}
@@ -204,7 +204,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
 
         <div>
           <label className="label" htmlFor={fieldId('email')}>
-            Email <span className="text-electric-400">*</span>
+            Email <span className="text-accent">*</span>
           </label>
           <input
             id={fieldId('email')}
@@ -220,7 +220,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
             {...errorProps('email')}
           />
           {errors.email && (
-            <p id={`${fieldId('email')}-error`} className="mt-1.5 text-xs text-red-300">
+            <p id={`${fieldId('email')}-error`} className="mt-1.5 text-xs text-red-700">
               {errors.email}
             </p>
           )}
@@ -228,7 +228,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
 
         <div>
           <label className="label" htmlFor={fieldId('phone')}>
-            Phone <span className="text-electric-400">*</span>
+            Phone <span className="text-accent">*</span>
           </label>
           <input
             id={fieldId('phone')}
@@ -244,7 +244,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
             {...errorProps('phone')}
           />
           {errors.phone && (
-            <p id={`${fieldId('phone')}-error`} className="mt-1.5 text-xs text-red-300">
+            <p id={`${fieldId('phone')}-error`} className="mt-1.5 text-xs text-red-700">
               {errors.phone}
             </p>
           )}
@@ -267,7 +267,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
 
         <div>
           <label className="label" htmlFor={fieldId('service')}>
-            Required Service <span className="text-electric-400">*</span>
+            Required Service <span className="text-accent">*</span>
           </label>
           <select
             id={fieldId('service')}
@@ -287,7 +287,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
             <option value="Not sure yet">Not sure yet</option>
           </select>
           {errors.service && (
-            <p id={`${fieldId('service')}-error`} className="mt-1.5 text-xs text-red-300">
+            <p id={`${fieldId('service')}-error`} className="mt-1.5 text-xs text-red-700">
               {errors.service}
             </p>
           )}
@@ -323,7 +323,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
 
         <div className={compact ? '' : 'sm:col-span-2'}>
           <label className="label" htmlFor={fieldId('message')}>
-            Project Description <span className="text-electric-400">*</span>
+            Project Description <span className="text-accent">*</span>
           </label>
           <textarea
             id={fieldId('message')}
@@ -337,7 +337,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
             {...errorProps('message')}
           />
           {errors.message && (
-            <p id={`${fieldId('message')}-error`} className="mt-1.5 text-xs text-red-300">
+            <p id={`${fieldId('message')}-error`} className="mt-1.5 text-xs text-red-700">
               {errors.message}
             </p>
           )}
@@ -353,7 +353,7 @@ export default function EnquiryForm({ compact = false }: { compact?: boolean }) 
       <button type="submit" disabled={status === 'loading'} className="btn-primary mt-6 w-full sm:w-auto">
         {status === 'loading' ? (
           <>
-            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-line border-t-white" />
             Sending…
           </>
         ) : (

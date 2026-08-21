@@ -6,7 +6,7 @@ import Icon from '@/components/Icon';
 import Accordion from '@/components/Accordion';
 import CTASection from '@/components/CTASection';
 import ProcessRail from '@/components/ProcessRail';
-import { GridBackdrop } from '@/components/Section';
+import { SpecLabel } from '@/components/Section';
 import { getService, services } from '@/data/services';
 import { site } from '@/data/site';
 
@@ -65,48 +65,35 @@ export default async function ServiceDetailPage({ params }: Params) {
 
   return (
     <>
-      {/* ── HERO — number-led masthead with a bleeding image panel */}
-      <section className="relative overflow-hidden pt-32 md:pt-36">
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image src={service.heroImage} alt="" fill priority sizes="100vw" className="object-cover opacity-25" />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/92 to-navy-950/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-navy-950/85" />
-        </div>
-        <GridBackdrop />
-
-        <div className="container relative pb-14">
-          <nav aria-label="Breadcrumb" className="reveal mb-7">
+      {/* ── HERO — indexed masthead with a bordered image plate */}
+      <section className="border-b border-line pt-28 md:pt-32">
+        <div className="container">
+          <nav aria-label="Breadcrumb" className="reveal border-b border-line pb-4">
             <ol className="flex flex-wrap items-center gap-2 text-xs text-ink-500">
               <li>
-                <Link href="/" className="transition hover:text-electric-400">Home</Link>
+                <Link href="/" className="transition hover:text-accent">Home</Link>
               </li>
               <li className="flex items-center gap-2">
-                <Icon name="arrow" className="h-3 w-3 opacity-50" />
-                <Link href="/services" className="transition hover:text-electric-400">Services</Link>
+                <Icon name="arrow" className="h-3 w-3 text-line" />
+                <Link href="/services" className="transition hover:text-accent">Services</Link>
               </li>
               <li className="flex items-center gap-2">
-                <Icon name="arrow" className="h-3 w-3 opacity-50" />
-                <span className="text-ink-300">{service.title}</span>
+                <Icon name="arrow" className="h-3 w-3 text-line" />
+                <span className="text-ink-700">{service.title}</span>
               </li>
             </ol>
           </nav>
 
-          <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:gap-14">
+          <div className="grid gap-10 pt-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:gap-14">
             <div>
-              <div className="reveal flex items-center gap-4">
-                <span className="font-display text-4xl font-semibold text-outline sm:text-5xl">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-electric-500/25 to-violet-500/25 text-electric-400">
-                  <Icon name={service.icon} className="h-5 w-5" />
-                </span>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ink-400">Service</span>
-              </div>
+              <SpecLabel index={String(index + 1).padStart(2, '0')} className="reveal">
+                Service
+              </SpecLabel>
 
-              <h1 className="reveal reveal-d1 mt-6 max-w-3xl text-[2.4rem] font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl lg:text-[3.7rem]">
+              <h1 className="reveal reveal-d1 mt-6 max-w-3xl text-[2.4rem] font-bold leading-[1.03] tracking-[-0.025em] text-ink-900 sm:text-5xl lg:text-[3.5rem]">
                 {service.title}
               </h1>
-              <p className="reveal reveal-d2 mt-5 max-w-2xl text-base leading-relaxed text-ink-300 sm:text-lg">
+              <p className="reveal reveal-d2 mt-5 max-w-2xl text-base leading-relaxed text-ink-700 sm:text-lg">
                 {service.short}
               </p>
               <div className="reveal reveal-d3 mt-8 flex flex-col gap-3 sm:flex-row">
@@ -120,7 +107,7 @@ export default async function ServiceDetailPage({ params }: Params) {
               </div>
             </div>
 
-            <div className="reveal reveal-d3 relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 shadow-card lg:aspect-[4/5]">
+            <div className="ticked reveal reveal-d3 relative aspect-[4/3] overflow-hidden border border-line bg-band lg:aspect-[4/5]">
               <Image
                 src={service.image}
                 alt={`${service.title} at Nexora Technologies`}
@@ -129,28 +116,26 @@ export default async function ServiceDetailPage({ params }: Params) {
                 sizes="(max-width: 1024px) 100vw, 380px"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/75 to-transparent" />
             </div>
           </div>
-        </div>
 
-        {/* meta rail */}
-        <div className="relative border-t border-white/10 bg-navy-950/55 backdrop-blur-sm">
-          <div className="container">
-            <dl className="grid grid-cols-2 divide-white/10 lg:grid-cols-4 lg:divide-x">
+          {/* meta rail */}
+          <dl className="mt-12 grid grid-cols-2 border-t border-line pb-14 lg:grid-cols-4">
               {[
                 { k: 'Practice', v: service.title },
                 { k: 'Deliverables', v: `${service.features.length} defined outputs` },
                 { k: 'Core tools', v: service.technologies.slice(0, 3).join(' · ') },
                 { k: 'Support', v: 'Retainer available post-launch' },
               ].map((m, i) => (
-                <div key={m.k} className={`reveal reveal-d${i} py-5 lg:px-7 lg:first:pl-0 lg:last:pr-0`}>
-                  <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-electric-400">{m.k}</dt>
-                  <dd className="mt-1.5 text-sm text-ink-300">{m.v}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+              <div
+                key={m.k}
+                className={`reveal reveal-d${i} border-b border-line py-5 lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0`}
+              >
+                <dt className="spec-key">{m.k}</dt>
+                <dd className="mt-2 text-sm leading-snug text-ink-800">{m.v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
@@ -158,22 +143,22 @@ export default async function ServiceDetailPage({ params }: Params) {
       <section className="section">
         <div className="container">
           <div className="grid gap-10 lg:grid-cols-[0.35fr_1fr] lg:gap-16">
-            <span className="eyebrow reveal lg:sticky lg:top-28 lg:self-start">Overview</span>
+            <SpecLabel index="01" className="reveal lg:sticky lg:top-28 lg:self-start">Overview</SpecLabel>
             <div className="reveal reveal-d1">
-              <p className="max-w-4xl font-display text-xl font-medium leading-[1.5] text-white sm:text-[1.65rem]">
+              <p className="max-w-4xl font-display text-xl font-medium leading-[1.5] text-ink-900 sm:text-[1.65rem]">
                 {service.overview[0]}
               </p>
-              <p className="mt-6 max-w-3xl text-base leading-relaxed text-ink-400">{service.overview[1]}</p>
+              <p className="mt-6 max-w-3xl text-base leading-relaxed text-ink-600">{service.overview[1]}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── CHALLENGES — numbered hairline rows */}
-      <section className="section border-y border-white/10 bg-navy-900/30 py-16 md:py-20">
+      <section className="section border-y border-line bg-band py-16 md:py-20">
         <div className="container grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <span className="eyebrow reveal">Business Challenges</span>
+            <SpecLabel index="02" className="reveal">Business Challenges</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold leading-[1.15] sm:text-3xl">
               What usually brings clients to us
             </h2>
@@ -183,8 +168,8 @@ export default async function ServiceDetailPage({ params }: Params) {
               <li key={c.title} className="rule-row flex gap-6 py-6">
                 <span className="idx pt-1">{String(i + 1).padStart(2, '0')}</span>
                 <span>
-                  <span className="block font-display text-lg font-semibold text-white">{c.title}</span>
-                  <span className="mt-2 block max-w-2xl text-sm leading-relaxed text-ink-400">{c.text}</span>
+                  <span className="block font-display text-lg font-semibold text-ink-900">{c.title}</span>
+                  <span className="mt-2 block max-w-2xl text-sm leading-relaxed text-ink-600">{c.text}</span>
                 </span>
               </li>
             ))}
@@ -196,17 +181,17 @@ export default async function ServiceDetailPage({ params }: Params) {
       <section className="section py-16 md:py-20">
         <div className="container">
           <div className="mb-10 max-w-2xl">
-            <span className="eyebrow reveal">Our Solution</span>
+            <SpecLabel index="03" className="reveal">Our Solution</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold leading-[1.15] sm:text-3xl">How we address it</h2>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 md:grid-cols-3">
+          <div className="spec-grid md:grid-cols-3">
             {service.solution.map((s, i) => (
-              <div key={s.title} className={`reveal reveal-d${i} bg-navy-950 p-7`}>
-                <span className="grid h-10 w-10 place-items-center rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300">
+              <div key={s.title} className={`reveal reveal-d${i} bg-paper p-7`}>
+                <span className="grid h-10 w-10 place-items-center rounded-sm border border-accent bg-accent-50 text-accent">
                   <Icon name="check" className="h-4 w-4" />
                 </span>
                 <h3 className="mt-5 font-display text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-ink-400">{s.text}</p>
+                <p className="mt-2.5 text-sm leading-relaxed text-ink-600">{s.text}</p>
               </div>
             ))}
           </div>
@@ -214,38 +199,38 @@ export default async function ServiceDetailPage({ params }: Params) {
       </section>
 
       {/* ── FEATURES + BENEFITS — two rhythms side by side */}
-      <section className="section border-y border-white/10 bg-navy-900/30 py-16 md:py-20">
+      <section className="section border-y border-line bg-band py-16 md:py-20">
         <div className="container grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
           <div>
-            <span className="eyebrow reveal">Features</span>
+            <SpecLabel index="04" className="reveal">Features</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold sm:text-3xl">What is included</h2>
             <ul className="reveal reveal-d2 mt-8">
               {service.features.map((f, i) => (
                 <li key={f} className="rule-row flex items-center gap-4 py-3.5">
                   <span className="idx w-6">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="text-sm text-ink-300">{f}</span>
+                  <span className="text-sm text-ink-700">{f}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <span className="eyebrow reveal">Benefits</span>
+            <SpecLabel index="05" className="reveal">Benefits</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold sm:text-3xl">What changes for you</h2>
             <div className="reveal reveal-d2 mt-8 space-y-8">
               {service.benefits.map((b) => (
-                <div key={b.title} className="border-l-2 border-electric-400/50 pl-5">
-                  <h3 className="font-display text-base font-semibold text-white">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-400">{b.text}</p>
+                <div key={b.title} className="border-l-2 border-accent pl-5">
+                  <h3 className="font-display text-base font-semibold text-ink-900">{b.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{b.text}</p>
                 </div>
               ))}
             </div>
 
             <div className="reveal reveal-d3 mt-10">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-500">Technology</p>
+              <p className="spec-key text-ink-500">Technology</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {service.technologies.map((t) => (
-                  <span key={t} className="glass rounded-full px-4 py-2 text-sm text-ink-200">
+                  <span key={t} className="plate rounded-sm px-4 py-2 text-sm text-ink-800">
                     {t}
                   </span>
                 ))}
@@ -259,7 +244,7 @@ export default async function ServiceDetailPage({ params }: Params) {
       <section className="section py-16 md:py-20">
         <div className="container">
           <div className="mb-12 max-w-2xl">
-            <span className="eyebrow reveal">Process</span>
+            <SpecLabel index="06" className="reveal">Process</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold sm:text-3xl">How the engagement runs</h2>
           </div>
           <div className="reveal reveal-d2">
@@ -269,10 +254,10 @@ export default async function ServiceDetailPage({ params }: Params) {
       </section>
 
       {/* ── FAQ */}
-      <section className="section border-t border-white/10 bg-navy-900/30 py-16 md:py-20">
+      <section className="section border-t border-line bg-band py-16 md:py-20">
         <div className="container grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <span className="eyebrow reveal">FAQ</span>
+            <SpecLabel index="07" className="reveal">FAQ</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold sm:text-3xl">
               {service.title} — common questions
             </h2>
@@ -297,13 +282,13 @@ export default async function ServiceDetailPage({ params }: Params) {
             {others.map((o) => (
               <li key={o.slug} className="rule-row">
                 <Link href={`/services/${o.slug}`} className="group flex items-center gap-4 py-5">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-electric-500/10 text-electric-400">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent-50 text-accent">
                     <Icon name={o.icon} className="h-4 w-4" />
                   </span>
-                  <span className="flex-1 text-[15px] font-medium text-ink-200 transition group-hover:text-white">
+                  <span className="flex-1 text-[15px] font-medium text-ink-800 transition group-hover:text-ink-900">
                     {o.title}
                   </span>
-                  <Icon name="arrow" className="h-4 w-4 text-ink-500 transition group-hover:text-electric-400" />
+                  <Icon name="arrow" className="h-4 w-4 text-ink-500 transition group-hover:text-accent" />
                 </Link>
               </li>
             ))}

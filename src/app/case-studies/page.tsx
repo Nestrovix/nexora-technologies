@@ -21,7 +21,7 @@ export default function CaseStudiesPage() {
           <>
             How we approach
             <br />
-            <span className="gradient-text">real delivery problems</span>
+            <span className="text-accent">real delivery problems</span>
           </>
         }
         lead="Filter by industry, service or technology. Every project below is a sample built for this website — not a real client engagement."

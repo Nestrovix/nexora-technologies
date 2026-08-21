@@ -1,70 +1,71 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import Icon from './Icon';
-import { GridBackdrop } from './Section';
+import { SpecLabel } from './Section';
 
+/**
+ * Compact masthead for document pages (legal, policy). Type only — no image
+ * plate, since these pages are text records.
+ */
 export default function PageHero({
   eyebrow,
+  index = '01',
   title,
   description,
-  image,
   imageAlt,
   breadcrumbs = [],
 }: {
   eyebrow?: string;
+  index?: string;
   title: string;
   description?: string;
-  image: string;
-  imageAlt: string;
+  image?: string;
+  imageAlt?: string;
   breadcrumbs?: { label: string; href?: string }[];
 }) {
   return (
-    <section className="relative overflow-hidden pb-16 pt-32 md:pb-20 md:pt-40">
-      <div className="absolute inset-0" aria-hidden="true">
-        <Image
-          src={image}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-[0.22]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy-950/85 to-navy-950" />
-      </div>
-      <GridBackdrop />
-      <div className="container relative">
+    <section className="border-b border-line pb-14 pt-28 md:pb-16 md:pt-32">
+      <div className="container">
         {breadcrumbs.length > 0 && (
-          <nav aria-label="Breadcrumb" className="reveal mb-6">
+          <nav aria-label="Breadcrumb" className="reveal border-b border-line pb-4">
             <ol className="flex flex-wrap items-center gap-2 text-xs text-ink-500">
               <li>
-                <Link href="/" className="transition hover:text-electric-400">
+                <Link href="/" className="transition hover:text-accent">
                   Home
                 </Link>
               </li>
               {breadcrumbs.map((crumb) => (
                 <li key={crumb.label} className="flex items-center gap-2">
-                  <Icon name="arrow" className="h-3 w-3 opacity-50" />
+                  <Icon name="arrow" className="h-3 w-3 text-line" />
                   {crumb.href ? (
-                    <Link href={crumb.href} className="transition hover:text-electric-400">
+                    <Link href={crumb.href} className="transition hover:text-accent">
                       {crumb.label}
                     </Link>
                   ) : (
-                    <span className="text-ink-300">{crumb.label}</span>
+                    <span className="text-ink-700">{crumb.label}</span>
                   )}
                 </li>
               ))}
             </ol>
           </nav>
         )}
-        {eyebrow && <span className="eyebrow reveal">{eyebrow}</span>}
-        <h1 className="reveal reveal-d1 mt-5 max-w-4xl text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-[3.4rem]">
-          {title}
-        </h1>
-        {description && (
-          <p className="reveal reveal-d2 mt-5 max-w-2xl text-base leading-relaxed text-ink-300 sm:text-lg">{description}</p>
-        )}
+
+        <div className="pt-10">
+          {eyebrow && (
+            <SpecLabel index={index} className="reveal">
+              {eyebrow}
+            </SpecLabel>
+          )}
+          <h1 className="reveal reveal-d1 mt-6 max-w-4xl text-4xl font-bold leading-[1.06] tracking-[-0.025em] text-ink-900 sm:text-5xl">
+            {title}
+          </h1>
+          {description && (
+            <p className="reveal reveal-d2 mt-5 max-w-2xl border-l-2 border-accent pl-5 text-base leading-relaxed text-ink-700">
+              {description}
+            </p>
+          )}
+        </div>
       </div>
-      <span className="sr-only">{imageAlt}</span>
+      {imageAlt && <span className="sr-only">{imageAlt}</span>}
     </section>
   );
 }

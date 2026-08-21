@@ -23,7 +23,7 @@ export default function IndustriesPage() {
           <>
             Sector context changes
             <br />
-            the <span className="gradient-text">right answer</span>
+            the <span className="text-accent">right answer</span>
           </>
         }
         lead="The same technology behaves differently under retail peak load, clinical privacy rules or manufacturing uptime targets. We build for the constraints you actually operate under."
@@ -42,13 +42,13 @@ export default function IndustriesPage() {
         <div className="container grid gap-12 lg:grid-cols-[14rem_1fr] lg:gap-16">
           {/* index rail */}
           <nav aria-label="Industries index" className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-500">Sectors</p>
+            <p className="spec-key text-ink-500">Sectors</p>
             <ol className="mt-4">
               {industries.map((ind, i) => (
                 <li key={ind.slug} className="rule-row">
                   <a
                     href={`#${ind.slug}`}
-                    className="group flex items-center gap-3 py-3 text-sm text-ink-400 transition hover:text-white"
+                    className="group flex items-center gap-3 py-3 text-sm text-ink-600 transition hover:text-ink-900"
                   >
                     <span className="idx">{String(i + 1).padStart(2, '0')}</span>
                     <span className="flex-1">{ind.name}</span>
@@ -58,13 +58,21 @@ export default function IndustriesPage() {
             </ol>
           </nav>
 
-          <div className="space-y-16">
+          <div className="space-y-10">
             {industries.map((industry, i) => {
               const related = caseStudies.filter((c) => c.industry === industry.name);
               return (
-                <article key={industry.slug} id={industry.slug} className="reveal scroll-mt-28">
-                  {/* full-width image band with the name overlaid */}
-                  <div className="relative aspect-[21/8] overflow-hidden rounded-2xl border border-white/10">
+                <article
+                  key={industry.slug}
+                  id={industry.slug}
+                  className="reveal scroll-mt-28 border border-line bg-paper"
+                >
+                  <div className="flex items-center gap-4 border-b border-line px-6 py-4">
+                    <span className="idx tabnum">{String(i + 1).padStart(2, '0')}</span>
+                    <h2 className="flex-1 font-display text-xl font-bold text-ink-900 sm:text-2xl">{industry.name}</h2>
+                  </div>
+
+                  <div className="relative aspect-[21/8] w-full overflow-hidden border-b border-line bg-band">
                     <Image
                       src={industry.image}
                       alt={`${industry.name} technology solutions by Nexora Technologies`}
@@ -73,29 +81,25 @@ export default function IndustriesPage() {
                       sizes="(max-width: 1024px) 100vw, 70vw"
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/55 to-transparent" />
-                    <div className="absolute inset-y-0 left-0 flex flex-col justify-center p-6 sm:p-9">
-                      <span className="idx">{String(i + 1).padStart(2, '0')}</span>
-                      <h2 className="mt-2 font-display text-2xl font-semibold sm:text-4xl">{industry.name}</h2>
-                    </div>
                   </div>
 
-                  <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-300">{industry.short}</p>
+                  <div className="p-6 sm:p-7">
+                  <p className="max-w-2xl text-base leading-relaxed text-ink-700">{industry.short}</p>
 
                   {/* challenge / response comparison table */}
-                  <div className="mt-8 overflow-hidden rounded-2xl border border-white/10">
-                    <div className="grid grid-cols-2 border-b border-white/10 bg-white/[0.03]">
-                      <p className="px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-500">
+                  <div className="mt-7 border border-line">
+                    <div className="grid grid-cols-2 border-b border-line bg-band">
+                      <p className="px-5 py-3 spec-key text-ink-500">
                         Common challenge
                       </p>
-                      <p className="border-l border-white/10 px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-electric-400">
+                      <p className="border-l border-line px-5 py-3 spec-key text-accent">
                         How we respond
                       </p>
                     </div>
                     {industry.challenges.map((c, row) => (
-                      <div key={c} className="grid grid-cols-2 border-b border-white/10 last:border-b-0">
-                        <p className="px-5 py-4 text-sm leading-relaxed text-ink-400">{c}</p>
-                        <p className="border-l border-white/10 px-5 py-4 text-sm leading-relaxed text-ink-200">
+                      <div key={c} className="grid grid-cols-2 border-b border-line last:border-b-0">
+                        <p className="px-5 py-4 text-sm leading-relaxed text-ink-600">{c}</p>
+                        <p className="border-l border-line px-5 py-4 text-sm leading-relaxed text-ink-800">
                           {industry.solutions[row]}
                         </p>
                       </div>
@@ -112,6 +116,7 @@ export default function IndustriesPage() {
                         Related case study
                       </Link>
                     )}
+                  </div>
                   </div>
                 </article>
               );

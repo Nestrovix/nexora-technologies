@@ -1,15 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Icon from './Icon';
-import { GridBackdrop } from './Section';
+import { SpecLabel } from './Section';
 
 /**
- * Page opening block — a left-aligned editorial masthead with a meta rail
- * running along the bottom. Deliberately different from the centred
- * hero-image-behind-headline pattern used elsewhere.
+ * Page masthead, built as the header block of a spec sheet: an indexed label,
+ * a left-aligned title, a lead in the second column, then a hairline meta
+ * table and a bordered image plate. No overlay, no tinted photograph.
  */
 export default function PageIntro({
   eyebrow,
+  index = '01',
   title,
   lead,
   image,
@@ -18,6 +19,7 @@ export default function PageIntro({
   breadcrumbs = [],
 }: {
   eyebrow: string;
+  index?: string;
   title: React.ReactNode;
   lead?: string;
   image: string;
@@ -26,32 +28,25 @@ export default function PageIntro({
   breadcrumbs?: { label: string; href?: string }[];
 }) {
   return (
-    <section className="relative overflow-hidden pt-32 md:pt-36">
-      <div className="absolute inset-0" aria-hidden="true">
-        <Image src={image} alt="" fill priority sizes="100vw" className="object-cover opacity-[0.28]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-navy-950/80" />
-      </div>
-      <GridBackdrop />
-
-      <div className="container relative pb-12">
+    <section className="border-b border-line pt-28 md:pt-32">
+      <div className="container">
         {breadcrumbs.length > 0 && (
-          <nav aria-label="Breadcrumb" className="reveal mb-7">
+          <nav aria-label="Breadcrumb" className="reveal border-b border-line pb-4">
             <ol className="flex flex-wrap items-center gap-2 text-xs text-ink-500">
               <li>
-                <Link href="/" className="transition hover:text-electric-400">
+                <Link href="/" className="transition hover:text-accent">
                   Home
                 </Link>
               </li>
               {breadcrumbs.map((c) => (
                 <li key={c.label} className="flex items-center gap-2">
-                  <Icon name="arrow" className="h-3 w-3 opacity-50" />
+                  <Icon name="arrow" className="h-3 w-3 text-line" />
                   {c.href ? (
-                    <Link href={c.href} className="transition hover:text-electric-400">
+                    <Link href={c.href} className="transition hover:text-accent">
                       {c.label}
                     </Link>
                   ) : (
-                    <span className="text-ink-300">{c.label}</span>
+                    <span className="text-ink-700">{c.label}</span>
                   )}
                 </li>
               ))}
@@ -59,34 +54,44 @@ export default function PageIntro({
           </nav>
         )}
 
-        <span className="eyebrow reveal">{eyebrow}</span>
+        <div className="pt-10">
+          <SpecLabel index={index} className="reveal">
+            {eyebrow}
+          </SpecLabel>
 
-        <div className="mt-6 grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:items-end lg:gap-16">
-          <h1 className="reveal reveal-d1 text-[2.4rem] font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl lg:text-[4rem]">
-            {title}
-          </h1>
-          {lead && (
-            <p className="reveal reveal-d2 max-w-xl text-base leading-relaxed text-ink-300 lg:pb-3">{lead}</p>
-          )}
-        </div>
-      </div>
-
-      {meta.length > 0 && (
-        <div className="relative border-t border-white/10 bg-navy-950/55 backdrop-blur-sm">
-          <div className="container">
-            <dl className="grid grid-cols-2 divide-white/10 lg:grid-cols-4 lg:divide-x">
-              {meta.map((m, i) => (
-                <div key={m.k} className={`reveal reveal-d${i} py-5 lg:px-7 lg:first:pl-0 lg:last:pr-0`}>
-                  <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-electric-400">{m.k}</dt>
-                  <dd className="mt-1.5 text-sm text-ink-300">{m.v}</dd>
-                </div>
-              ))}
-            </dl>
+          <div className="mt-6 grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-16">
+            <h1 className="reveal reveal-d1 text-[2.3rem] font-bold leading-[1.04] tracking-[-0.025em] text-ink-900 sm:text-5xl lg:text-[3.6rem]">
+              {title}
+            </h1>
+            {lead && (
+              <p className="reveal reveal-d2 max-w-xl border-l-2 border-accent pl-5 text-base leading-relaxed text-ink-700 lg:pb-2">
+                {lead}
+              </p>
+            )}
           </div>
         </div>
-      )}
 
-      <span className="sr-only">{imageAlt}</span>
+        {meta.length > 0 && (
+          <dl className="mt-12 grid grid-cols-2 border-t border-line lg:grid-cols-4">
+            {meta.map((m, i) => (
+              <div
+                key={m.k}
+                className={`reveal reveal-d${i} border-b border-line py-5 lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0`}
+              >
+                <dt className="spec-key">{m.k}</dt>
+                <dd className="mt-2 text-sm leading-snug text-ink-800">{m.v}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+
+        <figure className="reveal reveal-d2 mt-12 pb-16">
+          <div className="ticked relative aspect-[21/7] w-full overflow-hidden border border-line bg-band">
+            <Image src={image} alt={imageAlt} fill priority sizes="100vw" className="object-cover" />
+          </div>
+          <figcaption className="spec-key mt-3 text-ink-500">{imageAlt}</figcaption>
+        </figure>
+      </div>
     </section>
   );
 }

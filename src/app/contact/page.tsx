@@ -53,7 +53,7 @@ export default function ContactPage() {
           <>
             Talk to an expert
             <br />
-            about <span className="gradient-text">your project</span>
+            about <span className="text-accent">your project</span>
           </>
         }
         lead="Tell us what you are trying to build or fix. We will come back with questions, a suggested approach and an indicative range."
@@ -70,24 +70,24 @@ export default function ContactPage() {
 
       <section className="section pt-0">
         <div className="container">
-          <ul className="grid gap-x-14 border-t border-white/10 sm:grid-cols-2">
+          <ul className="grid gap-x-14 border-t border-line sm:grid-cols-2">
             {channels.map((c, i) => (
-              <li key={c.label} className={`reveal reveal-d${i} border-b border-white/10`}>
+              <li key={c.label} className={`reveal reveal-d${i} border-b border-line`}>
                 <a
                   href={c.href}
                   {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   className="group flex items-center gap-5 py-6"
                 >
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-electric-400 transition group-hover:border-electric-400/40">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-line bg-band text-accent transition group-hover:border-accent">
                     <Icon name={c.icon} className="h-5 w-5" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-500">
+                    <span className="block spec-key text-ink-500">
                       {c.label}
                     </span>
-                    <span className="mt-1 block break-words text-[15px] text-white">{c.value}</span>
+                    <span className="mt-1 block break-words text-[15px] text-ink-900">{c.value}</span>
                   </span>
-                  <Icon name="arrow" className="h-4 w-4 shrink-0 text-ink-500 transition group-hover:text-electric-400" />
+                  <Icon name="arrow" className="h-4 w-4 shrink-0 text-ink-500 transition group-hover:text-accent" />
                 </a>
               </li>
             ))}
@@ -99,39 +99,39 @@ export default function ContactPage() {
             </div>
 
             <div className="space-y-5">
-              <div className="reveal reveal-d1 border-t border-white/15 pt-6">
+              <div className="reveal reveal-d1 border-t border-line pt-6">
                 <h2 className="text-lg font-semibold">Office</h2>
-                <address className="mt-3 not-italic text-sm leading-relaxed text-ink-400">
+                <address className="mt-3 not-italic text-sm leading-relaxed text-ink-600">
                   {site.contact.addressLines.map((line) => (
                     <span key={line} className="block">
                       {line}
                     </span>
                   ))}
                 </address>
-                <h3 className="mt-6 text-sm font-semibold text-white">Business hours</h3>
-                <ul className="mt-2 space-y-1 text-sm text-ink-400">
+                <h3 className="mt-6 text-sm font-semibold text-ink-900">Business hours</h3>
+                <ul className="mt-2 space-y-1 text-sm text-ink-600">
                   {site.contact.hours.map((h) => (
                     <li key={h.days}>
-                      <span className="text-ink-300">{h.days}:</span> {h.time}
+                      <span className="text-ink-700">{h.days}:</span> {h.time}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="reveal reveal-d2 overflow-hidden rounded-2xl border border-white/10">
+              <div className="reveal reveal-d2 overflow-hidden rounded-2xl border border-line">
                 <h2 className="px-6 pt-6 text-lg font-semibold">Find us</h2>
                 <p className="px-6 pb-4 pt-1 text-xs text-ink-500">
                   Demo location — this build carries no real office address.
                 </p>
-                <div className="relative h-72 w-full bg-navy-800">
+                <div className="relative h-72 w-full bg-band">
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center">
-                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-electric-500/10 text-electric-400">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent-50 text-accent">
                       <Icon name="pin" className="h-5 w-5" />
                     </span>
-                    <p className="text-sm text-ink-300">{site.contact.addressLines.join(', ')}</p>
+                    <p className="text-sm text-ink-700">{site.contact.addressLines.join(', ')}</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between gap-3 border-t border-white/10 px-6 py-4">
+                <div className="flex items-center justify-between gap-3 border-t border-line px-6 py-4">
                   <p className="text-xs text-ink-500">Bengaluru, Karnataka, India</p>
                 </div>
               </div>
@@ -146,9 +146,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="section border-t border-white/10 bg-navy-900/30">
+      <section className="section border-t border-line bg-band">
         <div className="container grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <SectionHeading eyebrow="Before You Ask" title="Questions we hear most often" />
+          <SectionHeading eyebrow="Before You Ask" index="02" title="Questions we hear most often" />
           <div className="reveal reveal-d2">
             <Accordion items={faqs.slice(0, 6)} />
           </div>

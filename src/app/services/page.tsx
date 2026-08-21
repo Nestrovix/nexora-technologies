@@ -5,6 +5,7 @@ import Icon from '@/components/Icon';
 import PageIntro from '@/components/PageIntro';
 import CTASection from '@/components/CTASection';
 import ProcessRail from '@/components/ProcessRail';
+import { SpecLabel } from '@/components/Section';
 import { services } from '@/data/services';
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function ServicesPage() {
           <>
             Engineering capability
             <br />
-            across the <span className="gradient-text">full stack</span>
+            across the <span className="text-accent">full stack</span>
           </>
         }
         lead="Eight practices, one delivery standard. Each engagement is staffed with senior people who stay with it from discovery through to support."
@@ -43,13 +44,13 @@ export default function ServicesPage() {
         <div className="container grid gap-12 lg:grid-cols-[16rem_1fr] lg:gap-16">
           {/* Index rail */}
           <nav aria-label="Services index" className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-500">Index</p>
+            <p className="spec-key text-ink-500">Index</p>
             <ol className="mt-4">
               {services.map((s, i) => (
                 <li key={s.slug} className="rule-row">
                   <a
                     href={`#${s.slug}`}
-                    className="group flex items-center gap-3 py-3 text-sm text-ink-400 transition hover:text-white"
+                    className="group flex items-center gap-3 py-3 text-sm text-ink-600 transition hover:text-ink-900"
                   >
                     <span className="idx">{String(i + 1).padStart(2, '0')}</span>
                     <span className="flex-1">{s.title}</span>
@@ -60,49 +61,53 @@ export default function ServicesPage() {
             </ol>
           </nav>
 
-          {/* Blocks */}
-          <div>
+          {/* Spec blocks — one bordered record per practice */}
+          <div className="space-y-8">
             {services.map((service, i) => (
               <article
                 key={service.slug}
                 id={service.slug}
-                className="reveal scroll-mt-28 border-t border-white/15 pb-16 pt-10 first:border-t-0 first:pt-0 last:pb-0"
+                className="reveal scroll-mt-28 border border-line bg-paper"
               >
-                <div className="flex flex-wrap items-center gap-4">
-                  <span className="font-display text-5xl font-semibold text-outline sm:text-6xl">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-electric-500/20 to-violet-500/20 text-electric-400">
-                    <Icon name={service.icon} className="h-5 w-5" />
-                  </span>
-                  <h2 className="font-display text-2xl font-semibold sm:text-3xl">{service.title}</h2>
+                <div className="flex flex-wrap items-center gap-4 border-b border-line px-6 py-4 sm:px-7">
+                  <span className="idx tabnum">{String(i + 1).padStart(2, '0')}</span>
+                  <h2 className="flex-1 font-display text-xl font-bold text-ink-900 sm:text-2xl">{service.title}</h2>
+                  <Icon name={service.icon} className="h-5 w-5 text-ink-500" aria-hidden="true" />
                 </div>
 
-                <div className="mt-7 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+                <div className="grid gap-8 p-6 sm:p-7 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
                   <div>
-                    <p className="text-base leading-relaxed text-ink-300">{service.overview[0]}</p>
+                    <p className="text-base leading-relaxed text-ink-700">{service.overview[0]}</p>
 
-                    <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
-                      {service.features.slice(0, 6).map((f) => (
-                        <li key={f} className="flex items-start gap-2.5 text-sm text-ink-400">
-                          <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-electric-400" />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <dl className="mt-7 border-t border-line">
+                      <div className="grid gap-x-6 border-b border-line py-3 sm:grid-cols-[7rem_1fr]">
+                        <dt className="spec-key pt-1">Deliverables</dt>
+                        <dd className="text-[13px] leading-relaxed text-ink-700">
+                          {service.features.slice(0, 6).join(' · ')}
+                        </dd>
+                      </div>
+                      <div className="grid gap-x-6 border-b border-line py-3 sm:grid-cols-[7rem_1fr]">
+                        <dt className="spec-key pt-1">Stack</dt>
+                        <dd className="flex flex-wrap gap-1.5">
+                          {service.technologies.slice(0, 6).map((t) => (
+                            <span
+                              key={t}
+                              className="rounded-sm border border-line px-2 py-1 text-[12px] leading-none text-ink-700"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </dd>
+                      </div>
+                      <div className="grid gap-x-6 border-b border-line py-3 sm:grid-cols-[7rem_1fr]">
+                        <dt className="spec-key pt-1">Outputs</dt>
+                        <dd className="tabnum text-[13px] text-ink-700">
+                          {service.features.length} defined deliverables · {service.faqs.length} scoping answers
+                        </dd>
+                      </div>
+                    </dl>
 
-                    <div className="mt-7 flex flex-wrap gap-2">
-                      {service.technologies.slice(0, 6).map((t) => (
-                        <span
-                          key={t}
-                          className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-ink-300"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="mt-8 flex flex-wrap gap-3">
+                    <div className="mt-7 flex flex-wrap gap-3">
                       <Link href={`/services/${service.slug}`} className="btn-primary !py-2.5">
                         Explore {service.title}
                         <Icon name="arrow" className="h-4 w-4" />
@@ -113,7 +118,7 @@ export default function ServicesPage() {
                     </div>
                   </div>
 
-                  <div className="relative aspect-[16/11] overflow-hidden rounded-2xl border border-white/10 lg:aspect-auto">
+                  <div className="relative aspect-[16/11] overflow-hidden border border-line bg-band lg:aspect-auto lg:min-h-[280px]">
                     <Image
                       src={service.image}
                       alt={`${service.title} services`}
@@ -122,7 +127,6 @@ export default function ServicesPage() {
                       sizes="(max-width: 1024px) 100vw, 45vw"
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 to-transparent" />
                   </div>
                 </div>
               </article>
@@ -132,10 +136,10 @@ export default function ServicesPage() {
       </section>
 
       {/* ── Process rail */}
-      <section className="section border-t border-white/10 bg-navy-900/30">
+      <section className="section border-t border-line bg-band">
         <div className="container">
           <div className="mb-14 max-w-2xl">
-            <span className="eyebrow reveal">Delivery Process</span>
+            <SpecLabel index="02" className="reveal">Delivery Process</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.1] sm:text-4xl">
               The same seven stages behind every service
             </h2>

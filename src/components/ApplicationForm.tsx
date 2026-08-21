@@ -98,14 +98,14 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
 
   if (status === 'preview') {
     return (
-      <div className="glass rounded-2xl p-8 text-center" role="status" aria-live="polite">
-        <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-amber-400/15 text-amber-300">
+      <div className="plate rounded-2xl p-8 text-center" role="status" aria-live="polite">
+        <span className="mx-auto grid h-14 w-14 place-items-center rounded-sm bg-accent-50 text-ink-700">
           <Icon name="alert" className="h-7 w-7" />
         </span>
         <h3 className="mt-5 text-xl font-semibold">Validation passed — preview build</h3>
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-400">
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-600">
           This static preview has no server, so the application was not submitted or stored. Run the full app or set{' '}
-          <code className="font-mono text-ink-300">NEXT_PUBLIC_APPLY_ENDPOINT</code> to accept real applications.
+          <code className="font-mono text-ink-700">NEXT_PUBLIC_APPLY_ENDPOINT</code> to accept real applications.
         </p>
         <button type="button" onClick={() => setStatus('idle')} className="btn-ghost mt-6">
           Back to the form
@@ -116,12 +116,12 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
 
   if (status === 'success') {
     return (
-      <div className="glass rounded-2xl p-8 text-center" role="status" aria-live="polite">
-        <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-500/15 text-emerald-300">
+      <div className="plate rounded-2xl p-8 text-center" role="status" aria-live="polite">
+        <span className="mx-auto grid h-14 w-14 place-items-center rounded-sm bg-accent-50 text-accent">
           <Icon name="check" className="h-7 w-7" />
         </span>
         <h3 className="mt-5 text-xl font-semibold">Application received</h3>
-        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-400">
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-600">
           Thank you! Your application has been received. Our talent team will be in touch if there is a match.
         </p>
         <button type="button" onClick={() => setStatus('idle')} className="btn-ghost mt-6">
@@ -132,14 +132,14 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="glass rounded-2xl p-5 sm:p-7">
+    <form onSubmit={onSubmit} noValidate className="plate rounded-2xl p-5 sm:p-7">
       <h2 className="text-xl font-semibold">Apply to Nexora</h2>
-      <p className="mt-2 text-sm text-ink-400">
-        Fields marked <span className="text-electric-400">*</span> are required.
+      <p className="mt-2 text-sm text-ink-600">
+        Fields marked <span className="text-accent">*</span> are required.
       </p>
 
       {status === 'error' && (
-        <div className="mt-5 flex gap-3 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200" role="alert">
+        <div className="mt-5 flex gap-3 rounded-xl border border-red-600 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
           <Icon name="alert" className="mt-0.5 h-4 w-4 shrink-0" />
           <p>{serverMessage}</p>
         </div>
@@ -148,7 +148,7 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <div>
           <label className="label" htmlFor={fieldId('fullName')}>
-            Full Name <span className="text-electric-400">*</span>
+            Full Name <span className="text-accent">*</span>
           </label>
           <input
             id={fieldId('fullName')}
@@ -160,12 +160,12 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
             aria-invalid={!!errors.fullName}
             placeholder="Your name"
           />
-          {errors.fullName && <p className="mt-1.5 text-xs text-red-300">{errors.fullName}</p>}
+          {errors.fullName && <p className="mt-1.5 text-xs text-red-700">{errors.fullName}</p>}
         </div>
 
         <div>
           <label className="label" htmlFor={fieldId('email')}>
-            Email <span className="text-electric-400">*</span>
+            Email <span className="text-accent">*</span>
           </label>
           <input
             id={fieldId('email')}
@@ -177,12 +177,12 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
             aria-invalid={!!errors.email}
             placeholder="name@example.com"
           />
-          {errors.email && <p className="mt-1.5 text-xs text-red-300">{errors.email}</p>}
+          {errors.email && <p className="mt-1.5 text-xs text-red-700">{errors.email}</p>}
         </div>
 
         <div>
           <label className="label" htmlFor={fieldId('phone')}>
-            Phone <span className="text-electric-400">*</span>
+            Phone <span className="text-accent">*</span>
           </label>
           <input
             id={fieldId('phone')}
@@ -194,12 +194,12 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
             aria-invalid={!!errors.phone}
             placeholder="+91 00000 00000"
           />
-          {errors.phone && <p className="mt-1.5 text-xs text-red-300">{errors.phone}</p>}
+          {errors.phone && <p className="mt-1.5 text-xs text-red-700">{errors.phone}</p>}
         </div>
 
         <div>
           <label className="label" htmlFor={fieldId('position')}>
-            Position <span className="text-electric-400">*</span>
+            Position <span className="text-accent">*</span>
           </label>
           <select
             id={fieldId('position')}
@@ -216,24 +216,24 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
             ))}
             <option value="General application">General application</option>
           </select>
-          {errors.position && <p className="mt-1.5 text-xs text-red-300">{errors.position}</p>}
+          {errors.position && <p className="mt-1.5 text-xs text-red-700">{errors.position}</p>}
         </div>
 
         <div className="sm:col-span-2">
           <label className="label" htmlFor={fieldId('resume')}>
-            Resume <span className="text-electric-400">*</span>
+            Resume <span className="text-accent">*</span>
           </label>
           <label
             htmlFor={fieldId('resume')}
             className={`flex cursor-pointer items-center gap-4 rounded-xl border border-dashed px-4 py-5 transition ${
-              errors.resumeName ? 'border-red-400/60 bg-red-500/[0.04]' : 'border-white/20 bg-navy-900/60 hover:border-electric-400/50'
+              errors.resumeName ? 'border-red-600 bg-red-50' : 'border-line bg-band hover:border-accent'
             }`}
           >
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-electric-500/10 text-electric-400">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-50 text-accent">
               <Icon name="upload" className="h-5 w-5" />
             </span>
             <span className="min-w-0">
-              <span className="block truncate text-sm text-white">{file ? file.name : 'Choose a file'}</span>
+              <span className="block truncate text-sm text-ink-900">{file ? file.name : 'Choose a file'}</span>
               <span className="block text-xs text-ink-500">PDF or Word document, up to 5 MB</span>
             </span>
           </label>
@@ -246,7 +246,7 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
             className="sr-only"
             aria-invalid={!!errors.resumeName}
           />
-          {errors.resumeName && <p className="mt-1.5 text-xs text-red-300">{errors.resumeName}</p>}
+          {errors.resumeName && <p className="mt-1.5 text-xs text-red-700">{errors.resumeName}</p>}
         </div>
 
         <div className="sm:col-span-2">
@@ -272,7 +272,7 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
       <button type="submit" disabled={status === 'loading'} className="btn-primary mt-6 w-full sm:w-auto">
         {status === 'loading' ? (
           <>
-            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-line border-t-white" />
             Submitting…
           </>
         ) : (
@@ -283,7 +283,7 @@ export default function ApplicationForm({ defaultPosition = '' }: { defaultPosit
         )}
       </button>
 
-      <p className="mt-4 rounded-xl border border-amber-400/20 bg-amber-400/[0.06] px-4 py-3 text-xs leading-relaxed text-amber-200/80">
+      <p className="mt-4 rounded-xl border border-line bg-band px-4 py-3 text-xs leading-relaxed text-ink-700">
         <strong className="font-semibold">Backend required:</strong> the resume is validated in the browser and on the
         server, but file storage is not yet connected. Wire <code className="font-mono">/api/apply</code> to S3, Vercel
         Blob or your ATS before accepting live applications.

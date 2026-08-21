@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Icon from '@/components/Icon';
 import PageIntro from '@/components/PageIntro';
 import CTASection from '@/components/CTASection';
+import { SpecLabel } from '@/components/Section';
 import { solutions } from '@/data/solutions';
 import { industries } from '@/data/industries';
 
@@ -14,16 +15,6 @@ export const metadata: Metadata = {
   alternates: { canonical: '/solutions' },
 };
 
-/** Asymmetric column spans so no two rows are the same width. */
-const spans = [
-  'lg:col-span-7',
-  'lg:col-span-5',
-  'lg:col-span-5',
-  'lg:col-span-7',
-  'lg:col-span-6',
-  'lg:col-span-6',
-];
-
 export default function SolutionsPage() {
   return (
     <>
@@ -33,7 +24,7 @@ export default function SolutionsPage() {
           <>
             Packaged answers to
             <br />
-            <span className="gradient-text">recurring problems</span>
+            <span className="text-accent">recurring problems</span>
           </>
         }
         lead="Where we have solved the same class of problem repeatedly, we have turned it into a defined solution with a known shape, timeline and cost profile."
@@ -50,56 +41,62 @@ export default function SolutionsPage() {
 
       <section className="section">
         <div className="container">
-          <div className="grid gap-6 lg:grid-cols-12">
+          <div className="spec-grid lg:grid-cols-2">
             {solutions.map((solution, i) => (
               <article
                 key={solution.slug}
                 id={solution.slug}
-                className={`group reveal reveal-d${i % 4} scroll-mt-28 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] transition duration-500 hover:border-electric-400/30 ${spans[i]}`}
+                className={`reveal reveal-d${i % 4} flex flex-col scroll-mt-28 bg-paper`}
               >
-                <div className="relative aspect-[16/8] overflow-hidden">
+                <div className="flex items-center gap-4 border-b border-line px-6 py-4 sm:px-7">
+                  <span className="idx tabnum">{String(i + 1).padStart(2, '0')}</span>
+                  <h2 className="flex-1 font-display text-xl font-bold text-ink-900">{solution.title}</h2>
+                </div>
+
+                <div className="relative aspect-[16/7] w-full overflow-hidden border-b border-line bg-band">
                   <Image
                     src={solution.image}
                     alt={solution.title}
                     fill
                     loading={i < 2 ? 'eager' : 'lazy'}
-                    sizes="(max-width: 1024px) 100vw, 55vw"
-                    className="object-cover opacity-80 transition duration-700 ease-premium group-hover:scale-105 group-hover:opacity-100"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent" />
-                  <span className="absolute bottom-4 left-6 font-display text-5xl font-semibold text-outline">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
                 </div>
 
-                <div className="p-7 sm:p-8">
-                  <h2 className="font-display text-xl font-semibold sm:text-2xl">{solution.title}</h2>
-                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-400">{solution.summary}</p>
+                <div className="flex flex-1 flex-col p-6 sm:p-7">
+                  <p className="text-sm leading-relaxed text-ink-600">{solution.summary}</p>
 
-                  <ul className="mt-6">
-                    {solution.outcomes.map((o) => (
-                      <li key={o} className="rule-row flex items-start gap-3 py-3 text-sm text-ink-300">
-                        <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-electric-400" />
-                        <span>{o}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <dl className="mt-6 border-t border-line">
+                    <div className="grid gap-x-6 border-b border-line py-3 sm:grid-cols-[6.5rem_1fr]">
+                      <dt className="spec-key pt-1">Outcomes</dt>
+                      <dd>
+                        <ul className="space-y-1.5">
+                          {solution.outcomes.map((o) => (
+                            <li key={o} className="flex items-start gap-2 text-[13px] leading-snug text-ink-700">
+                              <Icon name="check" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
+                              <span>{o}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </dd>
+                    </div>
+                    <div className="grid gap-x-6 border-b border-line py-3 sm:grid-cols-[6.5rem_1fr]">
+                      <dt className="spec-key pt-1">Included</dt>
+                      <dd className="flex flex-wrap gap-1.5">
+                        {solution.includes.map((inc) => (
+                          <span
+                            key={inc}
+                            className="rounded-sm border border-line px-2 py-1 text-[12px] leading-none text-ink-700"
+                          >
+                            {inc}
+                          </span>
+                        ))}
+                      </dd>
+                    </div>
+                  </dl>
 
-                  <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-500">
-                    What&apos;s included
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {solution.includes.map((inc) => (
-                      <span
-                        key={inc}
-                        className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-ink-300"
-                      >
-                        {inc}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Link href="/contact" className="link-arrow mt-7">
+                  <Link href="/contact" className="link-arrow mt-6">
                     Discuss this solution
                     <Icon name="arrow" className="h-4 w-4" />
                   </Link>
@@ -111,10 +108,10 @@ export default function SolutionsPage() {
       </section>
 
       {/* Industry applicability — a compact chip band, not a card grid */}
-      <section className="border-y border-white/10 bg-navy-900/30 py-16">
+      <section className="border-y border-line bg-band py-16">
         <div className="container grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-16">
           <div>
-            <span className="eyebrow reveal">Applied by Industry</span>
+            <SpecLabel index="02" className="reveal">Applied by Industry</SpecLabel>
             <h2 className="reveal reveal-d1 mt-5 text-2xl font-semibold leading-[1.15] sm:text-3xl">
               The same solutions, shaped to your sector
             </h2>
@@ -124,7 +121,7 @@ export default function SolutionsPage() {
               <Link
                 key={industry.slug}
                 href={`/industries#${industry.slug}`}
-                className="rounded-full border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-ink-200 transition hover:border-electric-400/40 hover:text-white"
+                className="rounded-sm border border-line bg-paper px-4 py-2.5 text-sm font-medium text-ink-800 transition hover:border-accent hover:text-accent"
               >
                 {industry.name}
               </Link>

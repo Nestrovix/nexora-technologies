@@ -123,18 +123,28 @@ detail page, the sitemap entry and the related-content links.
 
 ## Design system
 
+The site is set as an engineering spec sheet: a light technical ground, hairline
+rules instead of shadows, squared corners and a single accent.
+
 | Token | Value |
 | --- | --- |
-| Base / surface | `navy-950 #050b1c`, `navy-900 #07112b`, `navy-800 #0b1a3d` |
-| Accent | `electric-500 #1f8bff` → `violet-500 #8b5cf6` gradient |
-| Text | `white`, `ink-200 #dde5f4`, `ink-400 #8697b8`, `ink-500 #8290b4` |
-| Display font | Sora (500/600/700) |
-| Body font | Inter (400/500/600) |
-| Radius | 0.875 / 1.25 / 1.75 rem |
+| Paper / band | `paper #FFFFFF`, `band #F2F4F7` |
+| Rule | `line #D9DEE7` (1px hairlines carry all structure) |
+| Accent | `accent #0F766E` (single teal — no gradients, no glow) |
+| Text | `ink-900 #0B1120`, `ink-700 #313C4F`, `ink-600 #4A5568`, `ink-500 #5B6779` |
+| Display font | Chivo (400/500/600/700) |
+| Body / UI font | Public Sans (400/500/600/700) |
+| Radius | 2px ceiling (`rounded-sm`) |
+| Ground | Graph paper — 24px minor cells inside a 120px major division |
 | Motion | `cubic-bezier(.22,.61,.36,1)`, IntersectionObserver scroll reveal |
 
-Glassmorphism is applied through the `.glass` / `.glass-strong` utilities in
-`globals.css`; all reusable button, card, field and section styles live in the same file.
+Section labels are set as `01 / SERVICES` — a tracked uppercase Public Sans label
+with a leading index, rendered by the `SpecLabel` component. Services, solutions
+and industries are bordered spec blocks in a hairline grid, each carrying a short
+label → value table; case studies read as data records (sector, service, duration,
+stack, outcome) in aligned rows. Reusable block, button, field and label styles
+(`.spec-label`, `.spec-key`, `.spec-grid`, `.spec-block`, `.spec-table`, `.plate`)
+live in `globals.css`.
 
 ---
 
