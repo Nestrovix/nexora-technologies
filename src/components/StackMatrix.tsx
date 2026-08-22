@@ -15,14 +15,14 @@ export default function StackMatrix({ className = '' }: { className?: string }) 
             className={`reveal reveal-d${i % 4} grid gap-x-8 gap-y-3 border-b border-line py-5 lg:grid-cols-[12rem_1fr]`}
           >
             <dt className="flex items-baseline gap-3">
-              <span className="font-mono text-[11px] text-accent">{group.ref}</span>
+              <span className="font-mono text-[10.5px] text-accent">{group.ref}</span>
               <span className="spec-key text-ink-900">{group.layer}</span>
             </dt>
             <dd className="flex flex-wrap gap-2">
               {group.items.map((item) => (
                 <span
                   key={item}
-                  className="rounded-sm border border-line bg-paper px-2.5 py-1.5 font-mono text-[12px] leading-none text-ink-700"
+                  className="rounded-sm border border-line bg-paper px-2.5 py-1.5 font-mono text-[11.5px] leading-none text-ink-700"
                 >
                   {item}
                 </span>

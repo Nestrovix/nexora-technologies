@@ -54,7 +54,7 @@ function Node({ x, y, w, h, label }: { x: number; y: number; w: number; h: numbe
         x={x + w / 2}
         y={y + h / 2 + 4}
         textAnchor="middle"
-        className="fill-ink-800 font-mono text-[12px]"
+        className="fill-ink-800 font-mono text-[11.5px]"
       >
         {label}
       </text>
@@ -100,7 +100,7 @@ export default function ArchitectureDiagram({ className = '' }: { className?: st
             {/* column headers */}
             {layers.map((layer, i) => (
               <g key={layer.id}>
-                <text x={cols[i].x} y={14} className="fill-ink-500 font-mono text-[11px] uppercase tracking-[0.16em]">
+                <text x={cols[i].x} y={14} className="fill-ink-500 font-mono text-[10.5px] uppercase tracking-[0.13em]">
                   {layer.ref}
                 </text>
                 <text x={cols[i].x} y={34} className="fill-ink-900 font-display text-[14px] font-semibold">
@@ -187,7 +187,7 @@ export default function ArchitectureDiagram({ className = '' }: { className?: st
               strokeWidth="1"
               strokeDasharray="5 5"
             />
-            <text x={cols[3].x} y={260} className="fill-ink-600 font-mono text-[11px]">
+            <text x={cols[3].x} y={260} className="fill-ink-600 font-mono text-[10.5px]">
               event bus · at-least-once delivery, idempotent consumers
             </text>
 
@@ -211,7 +211,7 @@ export default function ArchitectureDiagram({ className = '' }: { className?: st
               ['Backups', 'PITR + restore drills'],
             ].map((item, i) => (
               <g key={item[0]}>
-                <text x={36 + i * 262} y={348} className="fill-ink-800 font-mono text-[12px]">
+                <text x={36 + i * 262} y={348} className="fill-ink-800 font-mono text-[11.5px]">
                   {item[0]}
                 </text>
                 <text x={36 + i * 262} y={368} className="fill-ink-500 font-mono text-[10px]">
@@ -228,7 +228,7 @@ export default function ArchitectureDiagram({ className = '' }: { className?: st
         {layers.map((layer) => (
           <div key={layer.id} className="grid gap-x-6 gap-y-1 border-b border-line py-4 sm:grid-cols-[9rem_1fr]">
             <dt className="flex items-baseline gap-2">
-              <span className="font-mono text-[11px] text-accent">{layer.ref}</span>
+              <span className="font-mono text-[10.5px] text-accent">{layer.ref}</span>
               <span className="spec-key text-ink-900">{layer.name}</span>
             </dt>
             <dd className="text-[13px] leading-relaxed text-ink-700">

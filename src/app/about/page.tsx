@@ -133,7 +133,7 @@ export default function AboutPage() {
                   </span>
                   <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-ink-700">{item.label}</h2>
                 </div>
-                <p className="mt-6 font-display text-xl font-medium leading-[1.45] text-ink-900 sm:text-[1.6rem]">
+                <p className="mt-6 font-display text-xl font-medium leading-[1.45] text-ink-900 sm:text-[1.66rem]">
                   {item.text}
                 </p>
               </div>

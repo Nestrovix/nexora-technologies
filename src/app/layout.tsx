@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Fira_Code, Manrope, Public_Sans } from 'next/font/google';
+import { Azeret_Mono, Red_Hat_Display, Urbanist } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -7,22 +7,45 @@ import FloatingContact from '@/components/FloatingContact';
 import Reveal from '@/components/Reveal';
 import { site } from '@/data/site';
 
-const body = Public_Sans({
+/**
+ * Urbanist carries body copy and UI. Measured against the Public Sans it
+ * replaces (per 100px em): cap 70 vs 73, x-height 51 vs 52, lowercase advance
+ * 50.1 vs 53.0 — so it sets ~5% narrower at the same size while reading almost
+ * exactly as large. Body sizes therefore stay put; the tracked uppercase labels
+ * open up slightly (see globals.css) because Urbanist's caps are ~7% narrower.
+ *
+ * One caveat drives a decision below: Urbanist ships NO tabular figures — its
+ * `1` is less than half the width of its `0`, and `font-variant-numeric` has no
+ * effect. Anywhere a column of figures has to line up, the numerals are set in
+ * Red Hat Display, which does carry real `tnum`.
+ */
+const body = Urbanist({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-body',
   weight: ['400', '500', '600', '700'],
 });
 
-const display = Manrope({
+/**
+ * Red Hat Display carries headings. Cap 70 vs Manrope's 72 and a ~3% narrower
+ * lowercase, so the large headline steps are nudged up ~4% and the tracking is
+ * pulled a touch tighter — Red Hat Display sets looser than Manrope by default.
+ */
+const display = Red_Hat_Display({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-display',
   weight: ['400', '500', '600', '700', '800'],
 });
 
-/** Fira Code carries every code, terminal, diagram and metric block. */
-const mono = Fira_Code({
+/**
+ * Azeret Mono carries every code, terminal, diagram and metric surface.
+ * Its advance is 0.65em against Fira Code's 0.60em — 8.3% wider — while its
+ * x-height is 4% larger. Mono sizes therefore come down roughly one notch
+ * (13px → 12.5px, 12.5px → 12px, 11px → 10.5px), which lands the x-height on
+ * the old value and holds the width growth to about 4%.
+ */
+const mono = Azeret_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-mono',

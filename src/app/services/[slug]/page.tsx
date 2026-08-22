@@ -95,7 +95,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                 Service
               </SpecLabel>
 
-              <h1 className="reveal reveal-d1 mt-6 max-w-3xl text-[2.4rem] font-bold leading-[1.03] tracking-[-0.025em] text-ink-900 sm:text-5xl lg:text-[3.5rem]">
+              <h1 className="reveal reveal-d1 mt-6 max-w-3xl text-[2.5rem] font-bold leading-[1.03] tracking-[-0.03em] text-ink-900 sm:text-5xl lg:text-[3.65rem]">
                 {service.title}
               </h1>
               <p className="reveal reveal-d2 mt-5 max-w-2xl text-base leading-relaxed text-ink-700 sm:text-lg">
@@ -150,7 +150,7 @@ export default async function ServiceDetailPage({ params }: Params) {
           <div className="grid gap-10 lg:grid-cols-[0.35fr_1fr] lg:gap-16">
             <SpecLabel index="01" className="reveal lg:sticky lg:top-28 lg:self-start">Overview</SpecLabel>
             <div className="reveal reveal-d1">
-              <p className="max-w-4xl font-display text-xl font-medium leading-[1.5] text-ink-900 sm:text-[1.65rem]">
+              <p className="max-w-4xl font-display text-xl font-medium leading-[1.5] text-ink-900 sm:text-[1.72rem]">
                 {service.overview[0]}
               </p>
               <p className="mt-6 max-w-3xl text-base leading-relaxed text-ink-600">{service.overview[1]}</p>
@@ -293,7 +293,7 @@ export default async function ServiceDetailPage({ params }: Params) {
                 ].map((row) => (
                   <div key={row.k} className="grid gap-x-6 border-b border-line py-4 sm:grid-cols-[7rem_1fr]">
                     <dt className="spec-key pt-1 text-ink-500">{row.k}</dt>
-                    <dd className="font-mono text-[12px] leading-relaxed text-ink-700">{row.v}</dd>
+                    <dd className="font-mono text-[11.5px] leading-relaxed text-ink-700">{row.v}</dd>
                   </div>
                 ))}
               </dl>

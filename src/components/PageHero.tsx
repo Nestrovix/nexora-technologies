@@ -55,7 +55,7 @@ export default function PageHero({
               {eyebrow}
             </SpecLabel>
           )}
-          <h1 className="reveal reveal-d1 mt-6 max-w-4xl text-4xl font-bold leading-[1.06] tracking-[-0.025em] text-ink-900 sm:text-5xl">
+          <h1 className="reveal reveal-d1 mt-6 max-w-4xl text-4xl font-bold leading-[1.06] tracking-[-0.03em] text-ink-900 sm:text-5xl">
             {title}
           </h1>
           {description && (

@@ -60,7 +60,7 @@ export default function PageIntro({
           </SpecLabel>
 
           <div className="mt-6 grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-16">
-            <h1 className="reveal reveal-d1 text-[2.3rem] font-bold leading-[1.04] tracking-[-0.025em] text-ink-900 sm:text-5xl lg:text-[3.6rem]">
+            <h1 className="reveal reveal-d1 text-[2.4rem] font-bold leading-[1.04] tracking-[-0.03em] text-ink-900 sm:text-5xl lg:text-[3.75rem]">
               {title}
             </h1>
             {lead && (

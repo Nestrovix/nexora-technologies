@@ -32,7 +32,7 @@ export default function FeatureRows({ items }: { items: CaseStudy[] }) {
             </div>
 
             <div>
-              <h3 className="font-display text-2xl font-bold leading-tight text-ink-900 sm:text-[1.7rem]">
+              <h3 className="font-display text-2xl font-bold leading-tight text-ink-900 sm:text-[1.77rem]">
                 {project.title}
               </h3>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-600">{project.summary}</p>

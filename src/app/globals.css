@@ -5,8 +5,24 @@
 /* ============================================================
    NEXORA — SPEC-SHEET IDENTITY
    Light technical ground, hairline structure, one teal accent.
-   Manrope carries display type, Public Sans body and UI, Fira Code every
-   code, terminal, diagram and metric surface.
+   Red Hat Display carries display type, Urbanist body and UI, Azeret Mono
+   every code, terminal, diagram and metric surface.
+
+   TYPE RETUNE (measured at 100px em, browser-rendered)
+   ---------------------------------------------------
+   Red Hat Display  cap 70 / x 51 / lc adv 49.6   (Manrope: 72 / 54 / 52.1)
+   Urbanist         cap 70 / x 51 / lc adv 50.1   (Public Sans: 73 / 52 / 53.0)
+   Azeret Mono      cap 70 / x 55 / adv 65        (Fira Code: 69 / 53 / 60)
+
+   So: headline steps go up ~4% and tighten a hair (Red Hat Display sets
+   looser than Manrope); uppercase label tracking opens up (Urbanist's caps
+   are ~7% narrower); mono sizes come down one notch so Azeret's 8.3% wider
+   advance costs only ~4% and its x-height lands on Fira Code's.
+
+   Urbanist has NO tabular figures — `font-variant-numeric: tabular-nums` is
+   inert on it and its `1` is under half the width of its `0`. Every place a
+   column of numerals must line up therefore sets them in Red Hat Display
+   (real `tnum`) or in Azeret Mono.
    ============================================================ */
 
 @layer base {
@@ -65,7 +81,9 @@
   h4,
   h5 {
     @apply font-display text-ink-900;
-    letter-spacing: -0.015em;
+    /* Red Hat Display sets looser than Manrope, so the optical correction
+       goes from -0.015em to -0.02em to keep the same headline colour. */
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
@@ -123,18 +141,24 @@
   /* ---------- Section labels ------------------------------------------ */
 
   /*
-   * `01 / SERVICES` — tracked uppercase Public Sans (not a monospace face).
+   * `01 / SERVICES` — tracked uppercase Urbanist (not a monospace face).
    * The index and the slash are rendered by the SpecLabel component so the
    * numeral can be tinted independently.
    */
   .spec-label {
     @apply inline-flex w-fit items-baseline gap-2 font-sans text-[11px] font-semibold uppercase leading-none text-ink-900;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.24em;
     font-variant-numeric: tabular-nums;
   }
 
+  /*
+   * The index numeral is set in the display face: Urbanist ships no tabular
+   * figures, Red Hat Display does, so `01` and `11` keep the same advance and
+   * the labels stay on one vertical.
+   */
   .spec-label__index {
-    @apply text-accent;
+    @apply font-display text-accent;
+    font-variant-numeric: tabular-nums;
   }
 
   .spec-label__slash {
@@ -144,7 +168,7 @@
   /* Smaller sub-label used inside spec blocks and table headers. */
   .spec-key {
     @apply text-[10px] font-semibold uppercase leading-none text-ink-500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     font-variant-numeric: tabular-nums;
   }
 
@@ -198,17 +222,21 @@
     @apply border-b;
   }
 
-  /* Index numeral — tabular, tracked, accent-tinted. */
+  /*
+   * Index numeral — tabular, tracked, accent-tinted. Set in the display face
+   * rather than the body face because Urbanist has no tabular figures: a
+   * column of `01 / 02 / 11` would otherwise ragged-edge.
+   */
   .idx {
-    @apply font-sans text-[12px] font-semibold tabular-nums text-accent;
-    letter-spacing: 0.18em;
+    @apply font-display text-[12px] font-semibold tabular-nums text-accent;
+    letter-spacing: 0.2em;
   }
 
   /* ---------- Controls ------------------------------------------------- */
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-[13px] font-semibold uppercase leading-none transition duration-200 ease-premium disabled:cursor-not-allowed disabled:opacity-60;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.09em;
   }
 
   .btn-primary {
@@ -225,7 +253,7 @@
 
   .link-arrow {
     @apply inline-flex items-center gap-1.5 text-[13px] font-semibold uppercase text-accent underline-offset-4 transition hover:text-accent-700 hover:underline;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.09em;
   }
 
   .field {
@@ -247,19 +275,21 @@
    * as something typed rather than typeset.
    */
   .mono-eyebrow {
-    @apply inline-flex w-fit items-center gap-2 font-mono text-[11px] font-medium leading-none text-ink-600;
-    letter-spacing: 0.06em;
+    @apply inline-flex w-fit items-center gap-2 font-mono text-[10.5px] font-medium leading-none text-ink-600;
+    /* Azeret Mono is already a wide mono; the old 0.06em of extra air is no
+       longer needed to make it read as typed. */
+    letter-spacing: 0.03em;
   }
 
   /* Version tag — `v2.4.1`. A bordered monospace chip. */
   .tag-version {
-    @apply inline-flex items-center gap-1.5 rounded-sm border border-line bg-band px-2 py-1 font-mono text-[11px] font-medium leading-none text-ink-700;
+    @apply inline-flex items-center gap-1.5 rounded-sm border border-line bg-band px-2 py-1 font-mono text-[10.5px] font-medium leading-none text-ink-700;
   }
 
   /* Commit-hash reference — `a41f9c2`. */
   .commit-ref {
-    @apply font-mono text-[11px] leading-none text-ink-500;
-    letter-spacing: 0.02em;
+    @apply font-mono text-[10.5px] leading-none text-ink-500;
+    letter-spacing: 0;
   }
 
   /* `#` deep-link that appears beside a section heading. */
@@ -274,7 +304,7 @@
 
   /* Inline code inside prose. */
   .code-inline {
-    @apply rounded-sm border border-line bg-band px-1.5 py-0.5 font-mono text-[0.85em] text-ink-800;
+    @apply rounded-sm border border-line bg-band px-1.5 py-0.5 font-mono text-[0.8em] text-ink-800;
   }
 
   /* ---------- Dark panels: terminal, code, status ---------------------- */
@@ -292,7 +322,7 @@
   }
 
   .panel-dark__name {
-    @apply truncate font-mono text-[11px] leading-none text-term-dim;
+    @apply truncate font-mono text-[10.5px] leading-none text-term-dim;
   }
 
   /*
@@ -315,8 +345,14 @@
     border: 2px solid var(--term-bg);
   }
 
+  /*
+   * Azeret Mono runs 0.65em per character against Fira Code's 0.60em. Dropping
+   * a half-step (12.5→12, 13→12.5) puts the x-height back where Fira Code had
+   * it and keeps the widest line about 4% longer rather than 8.3% — the panel
+   * still scrolls inside `.code-scroll`, but far fewer lines need to.
+   */
   .code-body {
-    @apply block whitespace-pre font-mono text-[12.5px] leading-[1.75] text-term-text sm:text-[13px];
+    @apply block whitespace-pre font-mono text-[12px] leading-[1.8] text-term-text sm:text-[12.5px];
     tab-size: 2;
   }
 

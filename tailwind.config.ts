@@ -57,10 +57,41 @@ const config: Config = {
           500: '#5B6779', // muted labels (5.6:1 on paper, 5.1:1 on band)
         },
       },
+      /**
+       * Urbanist (body/UI), Red Hat Display (headings), Azeret Mono (code,
+       * terminal, diagram and metric surfaces). See src/app/layout.tsx for the
+       * measured metrics that drove the size and tracking retune.
+       */
       fontFamily: {
-        sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        sans: ['var(--font-body)', 'Urbanist', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Red Hat Display', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'Azeret Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+      },
+      /**
+       * Display steps, nudged up ~4%. Red Hat Display's cap-height is 70/100
+       * against Manrope's 72 and its lowercase sets ~3% narrower, so at the
+       * old values the headings read slightly small and slightly short. Only
+       * the steps used exclusively by display type are touched — text-xl and
+       * below carry body copy, where Urbanist's x-height (51 vs Public Sans's
+       * 52) is close enough to leave alone.
+       */
+      fontSize: {
+        '2xl': ['1.56rem', { lineHeight: '2.05rem' }],
+        '3xl': ['1.95rem', { lineHeight: '2.3rem' }],
+        '4xl': ['2.34rem', { lineHeight: '2.55rem' }],
+        '5xl': ['3.12rem', { lineHeight: '1' }],
+        '6xl': ['3.9rem', { lineHeight: '1' }],
+        '7xl': ['4.68rem', { lineHeight: '1' }],
+      },
+      /**
+       * Uppercase label tracking. Urbanist's capitals are ~7% narrower than
+       * Public Sans's, so the spec-sheet labels need a little more air to keep
+       * the same drafted feel; the button/link tracking follows suit.
+       */
+      letterSpacing: {
+        label: '0.24em',
+        key: '0.22em',
+        control: '0.09em',
       },
       /** Squared throughout — 2px is the ceiling. */
       borderRadius: {

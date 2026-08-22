@@ -19,12 +19,12 @@ export default function PipelineStrip({ className = '' }: { className?: string }
       <div className="border border-line bg-paper">
         {/* run header — reads like the top of a CI run page */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-line bg-band px-4 py-3">
-          <span className="font-mono text-[11px] font-medium text-ink-900">{pipeline.workflow}</span>
+          <span className="font-mono text-[10.5px] font-medium text-ink-900">{pipeline.workflow}</span>
           <span className="commit-ref">
             {pipeline.branch}@{pipeline.commit}
           </span>
           <span className="commit-ref hidden sm:inline">&ldquo;{pipeline.message}&rdquo;</span>
-          <span className="ml-auto flex items-center gap-2 font-mono text-[11px] text-ink-700">
+          <span className="ml-auto flex items-center gap-2 font-mono text-[10.5px] text-ink-700">
             <span className="dot bg-accent" aria-hidden="true" />
             {pipeline.result} · {pipeline.total}
           </span>
@@ -39,12 +39,12 @@ export default function PipelineStrip({ className = '' }: { className?: string }
                   <span className="font-mono text-[10px] tabnum text-ink-500">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="font-mono text-[12px] font-medium text-ink-900">{stage.name}</span>
-                  <span className={`ml-auto ${s.text} font-mono text-[13px]`} aria-hidden="true">
+                  <span className="font-mono text-[11.5px] font-medium text-ink-900">{stage.name}</span>
+                  <span className={`ml-auto ${s.text} font-mono text-[12.5px]`} aria-hidden="true">
                     {s.glyph}
                   </span>
                 </div>
-                <p className="mt-3 flex items-center gap-2 font-mono text-[11px] text-ink-600">
+                <p className="mt-3 flex items-center gap-2 font-mono text-[10.5px] text-ink-600">
                   <span className={`dot ${s.dot}`} aria-hidden="true" />
                   <span className="sr-only">Status: </span>
                   {s.label} · {stage.duration}

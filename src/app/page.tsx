@@ -71,7 +71,7 @@ export default function HomePage() {
           </div>
 
           <div className="pt-10">
-            <h1 className="reveal reveal-d1 max-w-5xl text-[2.6rem] font-bold leading-[1.02] tracking-[-0.03em] text-ink-900 sm:text-6xl lg:text-[4.4rem]">
+            <h1 className="reveal reveal-d1 max-w-5xl text-[2.7rem] font-bold leading-[1.02] tracking-[-0.035em] text-ink-900 sm:text-6xl lg:text-[4.6rem]">
               Technology That
               <br />
               <span className="text-accent">Moves Your Business</span>
@@ -151,7 +151,7 @@ export default function HomePage() {
                 key={stat.label}
                 className={`reveal reveal-d${i} border-b border-line py-5 sm:border-r sm:px-6 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0`}
               >
-                <dt className="tabnum font-mono text-3xl font-medium text-ink-900 sm:text-4xl">{stat.value}</dt>
+                <dt className="tabnum font-mono text-[28px] font-medium text-ink-900 sm:text-[33px]">{stat.value}</dt>
                 <dd className="mt-1.5 text-sm text-ink-600">{stat.label}</dd>
               </div>
             ))}
@@ -322,10 +322,10 @@ export default function HomePage() {
               <dl className="mt-4 border-t border-line">
                 {engineeringStandards.map((standard) => (
                   <div key={standard.ref} className="grid gap-x-6 gap-y-1 border-b border-line py-4 sm:grid-cols-[6.5rem_1fr]">
-                    <dt className="font-mono text-[11px] leading-5 text-accent">{standard.ref}</dt>
+                    <dt className="font-mono text-[10.5px] leading-5 text-accent">{standard.ref}</dt>
                     <dd>
                       <span className="block text-sm font-semibold text-ink-900">{standard.title}</span>
-                      <span className="mt-1 block text-[13px] leading-relaxed text-ink-600">{standard.text}</span>
+                      <span className="mt-1 block text-[12.5px] leading-relaxed text-ink-600">{standard.text}</span>
                     </dd>
                   </div>
                 ))}
@@ -459,7 +459,7 @@ export default function HomePage() {
             <figure className="reveal">
               <SpecLabel index="10">Client Feedback</SpecLabel>
               <Icon name="quote" className="mt-8 h-10 w-10 text-accent" />
-              <blockquote className="mt-5 font-display text-2xl font-medium leading-[1.35] text-ink-900 sm:text-[2rem]">
+              <blockquote className="mt-5 font-display text-2xl font-medium leading-[1.35] text-ink-900 sm:text-[2.08rem]">
                 “{leadQuote.quote}”
               </blockquote>
               <figcaption className="mt-8 flex items-center gap-4">

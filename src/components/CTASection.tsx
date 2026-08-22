@@ -21,7 +21,7 @@ export default function CTASection({
             <SpecLabel index="99" className="reveal">
               Let&apos;s build something
             </SpecLabel>
-            <h2 className="reveal reveal-d1 mt-5 max-w-2xl text-3xl font-bold leading-[1.1] tracking-[-0.02em] sm:text-4xl">
+            <h2 className="reveal reveal-d1 mt-5 max-w-2xl text-3xl font-bold leading-[1.1] tracking-[-0.025em] sm:text-4xl">
               {title}
             </h2>
             <p className="reveal reveal-d2 mt-4 max-w-xl text-base leading-relaxed text-ink-600">{text}</p>

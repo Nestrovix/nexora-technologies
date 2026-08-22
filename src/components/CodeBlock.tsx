@@ -39,7 +39,7 @@ export default function CodeBlock({
             <span className="dot bg-term-line" aria-hidden="true" />
             <span className="panel-dark__name">{filename}</span>
             {meta && (
-              <span className="ml-auto shrink-0 font-mono text-[11px] uppercase leading-none text-term-key">
+              <span className="ml-auto shrink-0 font-mono text-[10.5px] uppercase leading-none text-term-key">
                 {meta}
               </span>
             )}

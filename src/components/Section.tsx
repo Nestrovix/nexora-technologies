@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 /**
  * Section label — `01 / SERVICES`.
- * Tracked uppercase Public Sans with a leading index; no monospace, no pill.
+ * Tracked uppercase Urbanist with a leading index; no monospace, no pill.
  */
 export function SpecLabel({
   index,
@@ -46,7 +46,7 @@ export function SectionHeading({
           {eyebrow}
         </SpecLabel>
       )}
-      <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.12] sm:text-4xl lg:text-[2.5rem]">
+      <h2 className="reveal reveal-d1 mt-5 text-3xl font-semibold leading-[1.12] sm:text-4xl lg:text-[2.6rem]">
         {title}
       </h2>
       {description && <p className="reveal reveal-d2 mt-4 text-base leading-relaxed text-ink-600">{description}</p>}

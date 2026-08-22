@@ -70,7 +70,7 @@ export default async function CaseStudyPage({ params }: Params) {
                 <span className="spec-key text-ink-600">{study.service}</span>
               </div>
 
-              <h1 className="reveal reveal-d1 mt-6 text-[2.2rem] font-semibold leading-[1.04] tracking-[-0.02em] sm:text-5xl">
+              <h1 className="reveal reveal-d1 mt-6 text-[2.3rem] font-semibold leading-[1.04] tracking-[-0.025em] sm:text-5xl">
                 {study.title}
               </h1>
               <p className="reveal reveal-d2 mt-5 max-w-xl text-base leading-relaxed text-ink-700">{study.summary}</p>

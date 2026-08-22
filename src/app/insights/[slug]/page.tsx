@@ -78,7 +78,7 @@ export default async function InsightPage({ params }: Params) {
             <span className="text-ink-500">·</span>
             <span className="text-ink-500">{post.readTime}</span>
           </div>
-          <h1 className="reveal reveal-d1 mt-5 max-w-4xl text-3xl font-semibold leading-[1.12] sm:text-4xl lg:text-[3rem]">
+          <h1 className="reveal reveal-d1 mt-5 max-w-4xl text-3xl font-semibold leading-[1.12] sm:text-4xl lg:text-[3.12rem]">
             {post.title}
           </h1>
           <p className="reveal reveal-d2 mt-5 max-w-2xl text-base leading-relaxed text-ink-700 sm:text-lg">{post.excerpt}</p>
