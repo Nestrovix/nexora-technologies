@@ -10,6 +10,7 @@ import StackMatrix from '@/components/StackMatrix';
 import Terminal from '@/components/Terminal';
 import CodeBlock from '@/components/CodeBlock';
 import ArchitectureDiagram from '@/components/ArchitectureDiagram';
+import SystemHero from '@/components/SystemHero';
 import PipelineStrip from '@/components/PipelineStrip';
 import StatusPanel from '@/components/StatusPanel';
 import BentoIndustries from '@/components/BentoIndustries';
@@ -96,8 +97,17 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/*
+            THE SYSTEM, LIVE — the masthead visual is the platform itself:
+            clients → edge → gateway → services → data, with an observability
+            plane across it and a request travelling the connectors. Fully
+            rendered on the server with a layer already selected; the controls
+            only change which layer is lit.
+          */}
+          <SystemHero className="reveal reveal-d2 mt-10" />
+
           {/* Capability table */}
-          <dl className="mt-12 grid grid-cols-2 border-t border-line lg:grid-cols-4">
+          <dl className="mb-16 mt-12 grid grid-cols-2 border-t border-line lg:grid-cols-4">
             {heroBar.map((item, i) => (
               <div
                 key={item.k}
@@ -108,33 +118,6 @@ export default function HomePage() {
               </div>
             ))}
           </dl>
-
-          {/* Terminal transcript beside the delivery floor — the first thing a
-              technical visitor sees is a real deployment, not a stock photo. */}
-          <div className="reveal reveal-d2 mt-12 grid min-w-0 gap-6 pb-16 lg:grid-cols-[1.2fr_0.8fr]">
-            <Terminal
-              title="bash — orders-svc @ production"
-              lines={deployTerminal}
-              caption="Sample deployment transcript showing how we ship: tests gate the build, the release is canaried, and a rollback stays available for 24 hours. Illustrative output, not a live console."
-            />
-
-            <figure className="flex min-w-0 flex-col">
-              <div className="ticked relative min-h-[220px] flex-1 overflow-hidden border border-line bg-band">
-                <Image
-                  src="/assets/images/hero/hero-engineering-floor.webp"
-                  alt="Software engineers working at multi-monitor workstations with source code on screen"
-                  fill
-                  priority
-                  fetchPriority="high"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover object-center"
-                />
-              </div>
-              <figcaption className="spec-key mt-3 text-ink-500">
-                Fig. 01 — Engineering workstations during a release window
-              </figcaption>
-            </figure>
-          </div>
         </div>
       </section>
 
@@ -193,6 +176,38 @@ export default function HomePage() {
               <span className="commit-ref">trailing 30 days</span>
             </div>
             <StatusPanel />
+          </div>
+
+          {/* How a release actually leaves the building: the transcript and the
+              room it is watched from. Moved down out of the masthead — the
+              first screen is the architecture now, not a shell. */}
+          <div className="reveal reveal-d3 mt-14">
+            <div className="mb-6 flex flex-wrap items-center gap-3">
+              <MonoEyebrow>delivery/release</MonoEyebrow>
+              <span className="commit-ref">orders-svc · canary</span>
+            </div>
+            <div className="grid min-w-0 gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+              <Terminal
+                title="bash — orders-svc @ production"
+                lines={deployTerminal}
+                caption="Sample deployment transcript showing how we ship: tests gate the build, the release is canaried, and a rollback stays available for 24 hours. Illustrative output, not a live console."
+              />
+
+              <figure className="flex min-w-0 flex-col">
+                <div className="ticked relative min-h-[220px] flex-1 overflow-hidden border border-line bg-paper">
+                  <Image
+                    src="/assets/images/hero/hero-engineering-floor.webp"
+                    alt="Software engineers working at multi-monitor workstations with source code on screen"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover object-center"
+                  />
+                </div>
+                <figcaption className="spec-key mt-3 text-ink-500">
+                  Fig. 01 — Engineering workstations during a release window
+                </figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </section>

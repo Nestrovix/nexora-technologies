@@ -441,3 +441,43 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+/* ============================================================
+   AMBIENT REQUEST — the pulse travelling the hero system map.
+   ------------------------------------------------------------
+   `.nx-flow` is a single unbroken path running under the node plates of the
+   drawing in SystemHero; it draws no part of the diagram itself, so the map is
+   fully painted at every point of the cycle (and at first paint, before any
+   JavaScript runs — this is CSS only). Keep it one subpath: SVG restarts a dash
+   pattern at every subpath, which would put one pulse in every gap at once.
+
+   `pathLength="100"` normalises the dash maths, so the same two rules drive
+   both the wide and the stacked drawing regardless of their real geometry.
+
+   Under reduced motion the animation is dropped entirely and the same path
+   settles into a static dotted route, so the connectors still read as a path
+   rather than vanishing.
+   ============================================================ */
+.nx-flow {
+  stroke-dasharray: 4.5 100;
+  stroke-dashoffset: 4.5;
+  animation: nx-flow 4.4s linear infinite;
+}
+
+@keyframes nx-flow {
+  from {
+    stroke-dashoffset: 4.5;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nx-flow {
+    animation: none;
+    stroke-dasharray: 2 5;
+    stroke-dashoffset: 0;
+    opacity: 0.5;
+  }
+}
